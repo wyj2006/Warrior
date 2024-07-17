@@ -1,25 +1,33 @@
 import sys
 from PyQt5.QtWidgets import QApplication
 
-from Camera import Camera
+from Backpack import Backpack
 from Game import Game
+from GameObject import GameObject
+from GameWidget import GameWidget
 from InventoryViewer import InventoryViewer
-from Map import Block
-from Material import WoodMaterial
+from Player import Player
 from Surroundings import Surroundings
-from Tile import Tile
-from Weapon import Sword
-from WorldRender import WorldRender
+from Sword import Sword
+from Transform import Transform
 
-app = QApplication(sys.argv)
 
-game = Game()
-for i in range(10):
-    for j in range(10):
-        game.curworld.map.create_floor(i, j, 0, Block(Tile(chr(0), (100, 100, 100))))
-worldrender = WorldRender(game.curworld, Camera(game.curworld.player))
-worldrender.show()
+def main():
+    app = QApplication(sys.argv)
 
-game.curworld.player.equip("righthand", Sword(WoodMaterial(), game.curworld.player))
+    game = Game()
 
-sys.exit(app.exec())
+    backpack = Backpack(game.world)
+    Transform(backpack)
+
+    sword = Sword(game.world)
+    Transform(sword, 1, 0, 0)
+
+    gamewidget = GameWidget(game)
+    gamewidget.show()
+
+    app.exec()
+
+
+if __name__ == "__main__":
+    main()

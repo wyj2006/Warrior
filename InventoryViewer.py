@@ -1,66 +1,54 @@
 from PyQt5.QtWidgets import (
     QListWidget,
-    QWidget,
     QListWidgetItem,
-    QGridLayout,
-    QLabel,
     QPushButton,
-    QSpacerItem,
-    QSizePolicy,
+    QWidget,
+    QGridLayout,
+    QGroupBox,
 )
 
+from GameObject import GameObject
 from Item import Item
-from Player import Player
+from OperateViewer import OperateViewer
+from Player import Body, Player, RightHand
 
 
-class ItemViewer(QWidget):
-    def __init__(self, item: Item):
-        super().__init__()
-        self.setLayout(QGridLayout())
-
-        self.item = item
-
-        self.le_name = QLabel()
-        self.le_name.setText(str(item))
-        self.layout().addWidget(self.le_name, 0, 0)
-
-        self.layout().addItem(
-            QSpacerItem(0, 0, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum),
-            0,
-            1,
-        )
-
-        self.pb_throw = QPushButton()
-        self.pb_throw.setText(self.tr("丢弃"))
-        self.layout().addWidget(self.pb_throw, 0, 2)
-
-        self.adjustSize()
-
-
-class InventoryViewer(QListWidget):
+class InventoryViewer(QWidget):
     """浏览库存(Player)"""
 
     def __init__(self, player: Player):
         super().__init__()
-        self.resize(1000, 618)
-
         self.player = player
+
+        self.setLayout(QGridLayout())
 
         self.refresh()
 
-    @property
-    def inventory(self):
-        return self.player.inventory
-
     def refresh(self):
-        self.clear()
+        while self.layout().count():
+            item = self.layout().takeAt(0)
+            widget = item.widget()
+            if widget is not None:
+                widget.deleteLater()  # 安排删除控件
 
-        for item in self.inventory:
-            listitem = QListWidgetItem()
-            itemviewer = ItemViewer(item)
-            itemviewer.pb_throw.clicked.connect(
-                lambda _, item=item: (item.throw(), self.refresh())
-            )
-            listitem.setSizeHint(itemviewer.size())
-            self.addItem(listitem)
-            self.setItemWidget(listitem, itemviewer)
+        for t in (RightHand, Body):
+            groupbox = QGroupBox(self)
+            groupbox.setTitle(str(t))
+
+            listwidget = QListWidget(groupbox)
+            for item in GameObject.getObject(self.player, t, "*", Item):
+                listitem = QListWidgetItem()
+                viewer = QPushButton()
+                viewer.adjustSize()
+                viewer.setText(str(item))
+                viewer.clicked.connect(lambda _, o=item: OperateViewer(o).show())
+                listitem.setSizeHint(viewer.size())
+                listwidget.addItem(listitem)
+                listwidget.setItemWidget(listitem, viewer)
+
+            groupbox.setLayout(QGridLayout())
+            groupbox.layout().addWidget(listwidget)
+
+            self.layout().addWidget(groupbox)
+
+        self.adjustSize()

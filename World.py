@@ -1,26 +1,21 @@
-from PyQt5.QtCore import QObject
+from Chest import Chest
+from GameObject import GameObject
+from Generators import generate_room
+from Load import Load
+from Pig import Pig
+from Player import Player
+from Store import Store
+from Sword import Sword
 
-from Map import Map
 
+class World(GameObject):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        Player(self)
+        generate_room(self, 2)
 
-class World(QObject):
-    def __init__(self, game):
-        super().__init__(game)
-        from Player import Player
-        from Entity import Entity
+        chest = Chest(9, 9, 0, self)
+        sword = Sword(self)
+        GameObject.getObject(sword, Store)[0](GameObject.getObject(chest, Load)[0])
 
-        self.map = Map()
-        self.entities: list[Entity] = []
-
-        self.player = Player(self)
-
-    @property
-    def game(self):
-        return self.parent()
-
-    def entity_at(self, x, y, z):
-        entities = []
-        for entity in self.entities:
-            if (entity.x, entity.y, entity.z) == (x, y, z):
-                entities.append(entity)
-        return entities
+        Pig(self, 5, 5, 0)

@@ -4,40 +4,14 @@ from PyQt5.QtWidgets import (
     QGroupBox,
     QGridLayout,
     QListWidget,
-    QLabel,
-    QSpacerItem,
-    QSizePolicy,
     QPushButton,
 )
 
-from Drop import Drop
-from Entity import Entity
+from GameObject import GameObject
+from OperateViewer import OperateViewer
 from Player import Player
-
-
-class EntityViewer(QWidget):
-    def __init__(self, entity: Entity):
-        super().__init__()
-        self.entity = entity
-
-        self.setLayout(QGridLayout())
-
-        self.le_name = QLabel()
-        self.le_name.setText(str(entity))
-        self.layout().addWidget(self.le_name, 0, 0)
-
-        self.layout().addItem(
-            QSpacerItem(0, 0, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum),
-            0,
-            1,
-        )
-
-        self.pb_pick = QPushButton()
-        self.pb_pick.setText(self.tr("拾取"))
-        if isinstance(entity, Drop):
-            self.layout().addWidget(self.pb_pick, 0, 2)
-
-        self.adjustSize()
+from Transform import Transform
+from World import World
 
 
 class Surroundings(QWidget):
@@ -45,18 +19,14 @@ class Surroundings(QWidget):
 
     def __init__(self, player: Player):
         super().__init__()
-        self.resize(1000, 618)
-
         self.player = player
 
         self.setLayout(QGridLayout())
         self.refresh()
 
     def refresh(self):
-        world = self.player.world
-        x = self.player.x
-        y = self.player.y
-        z = self.player.z
+        world = GameObject.getObject(self.player, "/", World)[0]
+        x, y, z = Transform.globalXYZ(self.player)
 
         while self.layout().count():
             item = self.layout().takeAt(0)
@@ -80,14 +50,21 @@ class Surroundings(QWidget):
             groupbox.setTitle(vec_name)
 
             listwidget = QListWidget(groupbox)
-            for entity in world.entity_at(x + vec[0], y + vec[1], z):
-                if entity == self.player:
+            for transform in GameObject.getObject(world, "*", Transform):
+                if (
+                    transform.x != x + vec[0]
+                    or transform.y != y + vec[1]
+                    or transform.z != z
+                ):
+                    continue
+                obj = transform.parent()
+                if obj == self.player or obj.parent() != world:
                     continue
                 listitem = QListWidgetItem()
-                viewer = EntityViewer(entity)
-                viewer.pb_pick.clicked.connect(
-                    lambda _, e=entity: (self.player.pick(e), self.refresh())
-                )
+                viewer = QPushButton()
+                viewer.adjustSize()
+                viewer.setText(str(obj))
+                viewer.clicked.connect(lambda _, o=obj: OperateViewer(o).show())
                 listitem.setSizeHint(viewer.size())
                 listwidget.addItem(listitem)
                 listwidget.setItemWidget(listitem, viewer)
@@ -100,3 +77,5 @@ class Surroundings(QWidget):
             if j == 3:
                 i += 1
                 j = 0
+
+        self.adjustSize()

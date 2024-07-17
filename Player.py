@@ -1,53 +1,67 @@
-from PyQt5.QtCore import QObject
+from PyQt5.QtCore import QEvent, Qt
+from PyQt5.QtWidgets import qApp
 
-from Drop import Drop
-from Entity import Entity
-from Item import Item
-from Tile import Tile
-
-
-class RightHand(QObject):
-    def __init__(self, player: "Player"):
-        super().__init__(player)
-
-    @property
-    def items(self) -> list[Item]:
-        return self.findChildren(Item)
+from Camera import Camera
+from Collider import Collider
+from Events import NextTurnEvent
+from GameObject import GameObject
+from Motion import Motion
+from Texture import Texture
+from Transform import Transform
+from Wear import Wear
 
 
-class Player(Entity):
-    id = "Player"
-    name = "Player"
-
-    def _init(self):
-        self.tile = Tile("@")
-        self.speed = 0.1
-
-        self.righthand = RightHand(self)
+class KeyController(GameObject):
+    """键盘控制器(通过键盘控制移动)"""
 
     @property
-    def inventory(self):
-        return self.righthand.items
+    def motion(self) -> Motion:
+        return GameObject.getObject(self, "..", Motion)[0]
 
-    def move(self, vec: tuple[int, int]):
-        assert vec[0] in (-1, 0, 1) and vec[1] in (-1, 0, 1)
-        _x = self._x
-        _y = self._y
-        self._x += vec[0] * self.speed
-        self._y += vec[1] * self.speed
-        if not self.world.map.can_pass(self.x, self.y, self.z):
-            self._x = _x
-            self._y = _y
-        self.world.game.do_turn()
+    def event(self, e: QEvent):
+        if e.type() == QEvent.Type.KeyPress:
+            if e.key() == Qt.Key.Key_Up:
+                self.motion.move((0, 1, 0))
+                qApp.sendEvent(GameObject.getObject(self, "/")[0], NextTurnEvent())
+            if e.key() == Qt.Key.Key_Down:
+                self.motion.move((0, -1, 0))
+                qApp.sendEvent(GameObject.getObject(self, "/")[0], NextTurnEvent())
+            if e.key() == Qt.Key.Key_Left:
+                self.motion.move((-1, 0, 0))
+                qApp.sendEvent(GameObject.getObject(self, "/")[0], NextTurnEvent())
+            if e.key() == Qt.Key.Key_Right:
+                self.motion.move((1, 0, 0))
+                qApp.sendEvent(GameObject.getObject(self, "/")[0], NextTurnEvent())
+        return super().event(e)
 
-    def throw(self, item: Item):
-        Drop(self.world, self.x, self.y, self.z, item)
-        self.world.game.do_turn()
 
-    def pick(self, entity: Drop):
-        entity.kill()
-        self.world.game.do_turn()
+class Body(GameObject):
+    """身体"""
 
-    def equip(self, part: str, item: Item):
-        item.setParent(self.__dict__[part])
-        self.world.game.do_turn()
+    def __init__(self, parent=None):
+        super().__init__(parent)
+
+        Wear(self)
+
+
+class RightHand(GameObject):
+    """右手"""
+
+    def __init__(self, parent=None) -> None:
+        super().__init__(parent)
+
+        Wear(self)
+
+
+class Player(GameObject):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+
+        Texture("@", self)
+        Transform(self)
+        Motion(self)
+        KeyController(self)
+        Camera(self)
+        Collider(self)
+        Body(self)
+        RightHand(self)

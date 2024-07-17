@@ -1,20 +1,22 @@
-class Camera:
+from GameObject import GameObject
+from Transform import Transform
+
+
+class Camera(GameObject):
     """摄像机"""
 
-    def __init__(self, follow=None):
-        self.follow = follow
-        self._x = 0
-        self._y = 0
-        self._z = 0
+    def __init__(self, parent):
+        super().__init__(parent)
+        Transform(self)
 
     @property
     def x(self):
-        return getattr(self.follow, "x", self._x)
+        return Transform.globalXYZ(self)[0]
 
     @property
     def y(self):
-        return getattr(self.follow, "y", self._y)
+        return Transform.globalXYZ(self)[1]
 
     @property
     def z(self):
-        return getattr(self.follow, "z", self._z)
+        return Transform.globalXYZ(self)[2]
