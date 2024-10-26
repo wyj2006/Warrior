@@ -1,10 +1,10 @@
+from Action import Action
 from Collider import Collider
-from GameObject import GameObject
 from Transform import Transform
 
 
-class Motion(GameObject):
-    """赋予父对象运动的能力"""
+class Move(Action):
+    """移动"""
 
     def __init__(self, parent, speed: float = 1):
         super().__init__(parent)
@@ -17,11 +17,11 @@ class Motion(GameObject):
 
     @property
     def transform(self) -> Transform:
-        return GameObject.getObject(self, "..", Transform)[0]
+        return self.get("..", Transform)[0]
 
     @property
     def colliders(self) -> list[Collider]:
-        return GameObject.getObject(self, "..", Collider)
+        return self.get("..", Collider)
 
     @property
     def x(self):
@@ -50,7 +50,7 @@ class Motion(GameObject):
         self._z = val
         self.transform.z = int(self._z)
 
-    def move(self, vec: tuple[int, int, int]):
+    def __call__(self, vec: tuple[int, int, int]):
         """朝vec的方向移动"""
         _x = self.x
         _y = self.y
@@ -65,3 +65,5 @@ class Motion(GameObject):
                 self.y = _y
                 self.z = _z
                 break
+
+        super().__call__()

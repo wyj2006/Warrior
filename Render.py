@@ -37,11 +37,11 @@ class Render(QWidget):
 
         # 选择第一个没有禁用的摄像机
         # 如果都被禁用, 就选最后一个
-        camera: Camera = GameObject.getObject(self.obj, "*", Camera)[0]
+        camera: Camera = self.obj.get("*", Camera)[0]
 
         texture: Texture
-        for texture in GameObject.getObject(self.obj, "*", Texture)[:: self.reserve]:
-            x, y, z = Transform.globalXYZ(texture)
+        for texture in self.obj.get("*", Texture)[:: self.reserve]:
+            x, y, z = Transform.globalPos(texture)
 
             if z - camera.z not in (0, -1):
                 continue

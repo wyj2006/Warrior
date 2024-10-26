@@ -1,6 +1,5 @@
 import random
 from Block import Floor, Wall
-from Door import Door
 
 
 def generate_room(parent, num=1, width=10, height=10, x=0, y=0, z=0, generated=None):
@@ -34,14 +33,14 @@ def generate_room(parent, num=1, width=10, height=10, x=0, y=0, z=0, generated=N
         if vec != (1, 0) and i != height // 2:
             Wall(x + width, y + i, z, parent)
 
-    if vec == (0, 1):
+    """if vec == (0, 1):
         Door(x + width // 2, y + height, z, parent)
     elif vec == (0, -1):
         Door(x + width // 2, y - 1, z, parent)
     elif vec == (-1, 0):
         Door(x - 1, y + height // 2, z, parent)
     elif vec == (0, -1):
-        Door(x + width, y + height // 2, z, parent)
+        Door(x + width, y + height // 2, z, parent)"""
 
     generate_room(
         parent,

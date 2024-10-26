@@ -15,7 +15,7 @@ class GameWidget(QWidget):
         self.resize(1000, 618)
 
         self.game = game
-
+        self.setWindowTitle(str(self.game))
         self.worldrender = Render(self.game.world)
 
         self.setLayout(QGridLayout())
@@ -25,13 +25,11 @@ class GameWidget(QWidget):
         if e.type() in (QEvent.Type.KeyPress,):
             if e.key() == Qt.Key.Key_I:
                 self.inventoryviewer = InventoryViewer(
-                    GameObject.getObject(self.game, "*", Player)[0]
+                    self.game.world.get("*", Player)[0]
                 )
                 self.inventoryviewer.show()
             elif e.key() == Qt.Key.Key_L:
-                self.surroundings = Surroundings(
-                    GameObject.getObject(self.game, "*", Player)[0]
-                )
+                self.surroundings = Surroundings(self.game.world.get("*", Player)[0])
                 self.surroundings.show()
             e.ignore()
             qApp.sendEvent(self.game, e)

@@ -1,32 +1,18 @@
-from Disable import Disable
+from Action import Action
+from Container import Container
 from GameObject import GameObject
-from Operate import Operate
-from Pick import Pick
-from Throw import Throw
+from Transform import Transform
 
 
-class Store(Operate):
-    """存储"""
-
-    def __init__(self, parent=None):
-        super().__init__("存储", parent)
-        self.name = self.tr("存储")
-
-        Pick(self)
-
-    def __call__(self, load: Operate):
-        from Worn import Worn
-
-        for i in GameObject.getObject(self, Operate):
-            i()
-
-        Disable(self)
-
-        for t in (Throw, Worn):
-            for i in GameObject.getObject(self, "..", t, ignore_disabled=False):
-                for d in GameObject.getObject(i, Disable, ignore_disabled=False):
-                    d.setParent(None)
-
-        load(self.parent())
-
+class Store(Action):
+    def __call__(self, target: GameObject, container: Container):
+        target.setParent(container)
+        if target.get(Transform):
+            Transform(target)
         super().__call__()
+
+
+class Storable(GameObject):
+    @property
+    def stored(self):
+        return isinstance(self.parent().parent(), Container)

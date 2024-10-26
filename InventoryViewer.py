@@ -7,10 +7,12 @@ from PyQt5.QtWidgets import (
     QGroupBox,
 )
 
+from BodyPart import Body
+from Events import NextTurnEvent
 from GameObject import GameObject
 from Item import Item
-from OperateViewer import OperateViewer
-from Player import Body, Player, RightHand
+from ActionViewer import ActionViewer
+from Player import Player, RightHand
 
 
 class InventoryViewer(QWidget):
@@ -18,7 +20,10 @@ class InventoryViewer(QWidget):
 
     def __init__(self, player: Player):
         super().__init__()
+        self.resize(1000, 618)
+
         self.player = player
+        self.player.installEventFilter(self)
 
         self.setLayout(QGridLayout())
 
@@ -36,12 +41,12 @@ class InventoryViewer(QWidget):
             groupbox.setTitle(str(t))
 
             listwidget = QListWidget(groupbox)
-            for item in GameObject.getObject(self.player, t, "*", Item):
+            for item in self.player.get(t, "*", Item):
                 listitem = QListWidgetItem()
                 viewer = QPushButton()
                 viewer.adjustSize()
                 viewer.setText(str(item))
-                viewer.clicked.connect(lambda _, o=item: OperateViewer(o).show())
+                viewer.clicked.connect(lambda _, o=item: ActionViewer(o).show())
                 listitem.setSizeHint(viewer.size())
                 listwidget.addItem(listitem)
                 listwidget.setItemWidget(listitem, viewer)
@@ -51,4 +56,7 @@ class InventoryViewer(QWidget):
 
             self.layout().addWidget(groupbox)
 
-        self.adjustSize()
+    def eventFilter(self, obj, e):
+        if isinstance(e, NextTurnEvent):
+            self.refresh()
+        return super().eventFilter(obj, e)

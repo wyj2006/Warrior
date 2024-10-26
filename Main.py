@@ -5,9 +5,7 @@ from Backpack import Backpack
 from Game import Game
 from GameObject import GameObject
 from GameWidget import GameWidget
-from InventoryViewer import InventoryViewer
 from Player import Player
-from Surroundings import Surroundings
 from Sword import Sword
 from Transform import Transform
 
@@ -17,11 +15,11 @@ def main():
 
     game = Game()
 
-    backpack = Backpack(game.world)
-    Transform(backpack)
-
     sword = Sword(game.world)
-    Transform(sword, 1, 0, 0)
+    Transform(sword)
+
+    backpack = Backpack(game.world)
+    Transform(backpack, 1)
 
     gamewidget = GameWidget(game)
     gamewidget.show()

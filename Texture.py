@@ -2,7 +2,6 @@ from copy import deepcopy
 from PIL import Image, ImageQt
 
 from GameObject import GameObject
-from Transform import Transform
 
 TILE_PATH = "tiles.bmp"  # 瓦片图片路径
 TILE_WIDTH = 8  # 单个瓦片宽度
@@ -29,7 +28,7 @@ class Texture(GameObject):
     """指示空间物体的贴图"""
 
     def __init__(
-        self, ch: str, parent=None, back_color=(0, 0, 0), fore_color=(255, 255, 255)
+        self, ch: str, parent, back_color=(0, 0, 0), fore_color=(255, 255, 255)
     ):
         assert len(ch) == 1
         super().__init__(parent)
@@ -50,5 +49,3 @@ class Texture(GameObject):
 
         self.back_color = back_color
         self.fore_color = fore_color
-
-        Transform(self)  # 贴图相对于父对象的坐标

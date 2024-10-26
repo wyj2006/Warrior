@@ -7,8 +7,8 @@ from PyQt5.QtWidgets import (
     QPushButton,
 )
 
-from GameObject import GameObject
-from OperateViewer import OperateViewer
+from ActionViewer import ActionViewer
+from Events import NextTurnEvent
 from Player import Player
 from Transform import Transform
 from World import World
@@ -19,14 +19,19 @@ class Surroundings(QWidget):
 
     def __init__(self, player: Player):
         super().__init__()
+        self.resize(1000, 618)
+
         self.player = player
+        self.player.installEventFilter(self)
 
         self.setLayout(QGridLayout())
         self.refresh()
 
     def refresh(self):
-        world = GameObject.getObject(self.player, "/", World)[0]
-        x, y, z = Transform.globalXYZ(self.player)
+        world: World = self.player.get("/")[0]
+        x, y, z = Transform.globalPos(self.player)
+
+        self.setWindowTitle(f"{x},{y},{z}")
 
         while self.layout().count():
             item = self.layout().takeAt(0)
@@ -50,7 +55,7 @@ class Surroundings(QWidget):
             groupbox.setTitle(vec_name)
 
             listwidget = QListWidget(groupbox)
-            for transform in GameObject.getObject(world, "*", Transform):
+            for transform in world.get("*", Transform):
                 if (
                     transform.x != x + vec[0]
                     or transform.y != y + vec[1]
@@ -64,7 +69,7 @@ class Surroundings(QWidget):
                 viewer = QPushButton()
                 viewer.adjustSize()
                 viewer.setText(str(obj))
-                viewer.clicked.connect(lambda _, o=obj: OperateViewer(o).show())
+                viewer.clicked.connect(lambda _, o=obj: ActionViewer(o).show())
                 listitem.setSizeHint(viewer.size())
                 listwidget.addItem(listitem)
                 listwidget.setItemWidget(listitem, viewer)
@@ -78,4 +83,7 @@ class Surroundings(QWidget):
                 i += 1
                 j = 0
 
-        self.adjustSize()
+    def eventFilter(self, obj, e):
+        if isinstance(e, NextTurnEvent):
+            self.refresh()
+        return super().eventFilter(obj, e)

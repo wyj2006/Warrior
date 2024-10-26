@@ -5,7 +5,7 @@ from Transform import Transform
 class Collider(GameObject):
     """碰撞器"""
 
-    def __init__(self, parent=None, x_size=1, y_size=1, z_size=1):
+    def __init__(self, parent, x_size=1, y_size=1, z_size=1):
         super().__init__(parent)
 
         # 碰撞箱在各个方向的大小
@@ -13,17 +13,19 @@ class Collider(GameObject):
         self.y_size = y_size
         self.z_size = z_size
 
-        Transform(self)  # 碰撞器的相对位置
-
     def detect(self) -> bool:
-        """检测碰撞"""
-        x, y, z = Transform.globalXYZ(self)
+        """
+        检测碰撞
+        如果发生碰撞, 返回碰撞物体的坐标
+        否则返回None
+        """
+        x, y, z = Transform.globalPos(self)
 
         collider: Collider
-        for collider in GameObject.getObject(self, "/", "*", Collider):
+        for collider in self.get("/", "*", Collider):
             if collider == self:
                 continue
-            cx, cy, cz = Transform.globalXYZ(collider)
+            cx, cy, cz = Transform.globalPos(collider)
             if (
                 cx < x + self.x_size
                 and cx + collider.x_size > x
@@ -32,5 +34,5 @@ class Collider(GameObject):
                 and cz < z + self.z_size
                 and cz + collider.y_size > z
             ):
-                return True
-        return False
+                return cx, cy, cz
+        return None
