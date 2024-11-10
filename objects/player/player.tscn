@@ -1,0 +1,20 @@
+[gd_scene load_steps=6 format=3 uid="uid://bho8vb1xni3n0"]
+
+[ext_resource type="Script" path="res://objects/player/player.gd" id="2_20gqe"]
+[ext_resource type="PackedScene" uid="uid://c18a53ikwaqwk" path="res://components/speed_component/speed_component.tscn" id="2_rrrsq"]
+[ext_resource type="PackedScene" uid="uid://c5m3iq840s1dx" path="res://components/move_component/move_component.tscn" id="2_w4ly8"]
+[ext_resource type="PackedScene" uid="uid://cpxome1m0hc5k" path="res://components/store_component/store_component.tscn" id="3_xp4n5"]
+[ext_resource type="PackedScene" uid="uid://dr54fskhkn0m5" path="res://components/pick_component/pick_component.tscn" id="5_egvf6"]
+
+[node name="Player" type="Sprite2D"]
+z_index = 2
+script = ExtResource("2_20gqe")
+
+[node name="SpeedComponent" parent="." instance=ExtResource("2_rrrsq")]
+basic_speed = 1.0
+
+[node name="MoveComponent" parent="." instance=ExtResource("2_w4ly8")]
+
+[node name="StoreComponent" parent="." instance=ExtResource("3_xp4n5")]
+
+[node name="PickComponent" parent="." instance=ExtResource("5_egvf6")]

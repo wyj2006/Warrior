@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://dr8tpe2264aem"]
+
+[ext_resource type="FontFile" uid="uid://d32tns028vqyc" path="res://asserts/font/minecraft.ttf" id="1_qa34v"]
+[ext_resource type="Script" path="res://states/pick_obj_choose_state/pickable_object_view.gd" id="2_x4e5u"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i3qm3"]
+bg_color = Color(0.6, 0.6, 0.6, 0.509804)
+
+[node name="PickableObjectView" type="Button"]
+theme_override_colors/font_pressed_color = Color(0, 1, 0, 1)
+theme_override_fonts/font = ExtResource("1_qa34v")
+theme_override_styles/focus = SubResource("StyleBoxFlat_i3qm3")
+toggle_mode = true
+text = "测试文本"
+flat = true
+alignment = 0
+script = ExtResource("2_x4e5u")

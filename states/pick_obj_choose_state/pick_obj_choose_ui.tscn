@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://cehlx0h4qfp6i"]
+
+[ext_resource type="Script" path="res://states/pick_obj_choose_state/pick_obj_choose_ui.gd" id="1_j77f8"]
+
+[node name="PickObjChooseUi" type="CanvasLayer"]
+script = ExtResource("1_j77f8")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+follow_focus = true
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="PickableObjectContainer" type="VBoxContainer" parent="MarginContainer/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3

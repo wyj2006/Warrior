@@ -1,0 +1,24 @@
+[gd_scene load_steps=7 format=3 uid="uid://bf1aktrr4854g"]
+
+[ext_resource type="PackedScene" uid="uid://c3d7rnakxt3kg" path="res://components/item_component/item_component.tscn" id="1_34ekq"]
+[ext_resource type="Script" path="res://objects/sword/sword.gd" id="1_vkaad"]
+[ext_resource type="PackedScene" uid="uid://c78osp3albyss" path="res://components/pick_component/pickable.tscn" id="2_e67fo"]
+[ext_resource type="PackedScene" uid="uid://d1775i78g6ie7" path="res://components/name_component/name_component.tscn" id="3_q0fxr"]
+[ext_resource type="PackedScene" uid="uid://dwgxm8f4dqwom" path="res://components/volumn_component/volumn_component.tscn" id="4_8ka85"]
+[ext_resource type="PackedScene" uid="uid://6wpmy1mer2xg" path="res://components/store_component/storable.tscn" id="6_31wle"]
+
+[node name="Sword" type="Sprite2D"]
+z_index = 2
+script = ExtResource("1_vkaad")
+
+[node name="ItemComponent" parent="." instance=ExtResource("1_34ekq")]
+id = "sword"
+
+[node name="Pickable" parent="." instance=ExtResource("2_e67fo")]
+
+[node name="NameComponent" parent="." instance=ExtResource("3_q0fxr")]
+basic_name = "剑"
+
+[node name="VolumnComponent" parent="." instance=ExtResource("4_8ka85")]
+
+[node name="Storable" parent="." instance=ExtResource("6_31wle")]

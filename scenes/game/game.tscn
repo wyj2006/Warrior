@@ -1,0 +1,54 @@
+[gd_scene load_steps=12 format=3 uid="uid://co78v6keepvkl"]
+
+[ext_resource type="Script" path="res://scenes/game/game.gd" id="1_nv4jd"]
+[ext_resource type="PackedScene" uid="uid://ia1s0m4hg1sr" path="res://states/init_state/init_state.tscn" id="2_0dmrj"]
+[ext_resource type="PackedScene" uid="uid://bho8vb1xni3n0" path="res://objects/player/player.tscn" id="2_55r3k"]
+[ext_resource type="PackedScene" uid="uid://bdyl7q4fvaye" path="res://managers/tile_manager/tile_manager.tscn" id="2_hknot"]
+[ext_resource type="PackedScene" uid="uid://d14bdd2b7wfwv" path="res://managers/map_manager/map_manager.tscn" id="3_46d1v"]
+[ext_resource type="PackedScene" uid="uid://2ikf7jqv3dm8" path="res://states/player_wait_input_state/player_wait_input_state.tscn" id="3_divh0"]
+[ext_resource type="PackedScene" uid="uid://b2r72cngtm6yy" path="res://states/pick_pos_choose_state/pick_pos_choose_state.tscn" id="4_6k8r0"]
+[ext_resource type="PackedScene" uid="uid://hpq3efjhjg7v" path="res://states/pick_obj_choose_state/pick_obj_choose_state.tscn" id="5_563o4"]
+[ext_resource type="PackedScene" uid="uid://dxryuyhn3xrmu" path="res://components/zlayer_component/z_layer_component.tscn" id="8_s0on6"]
+[ext_resource type="PackedScene" uid="uid://bf1aktrr4854g" path="res://objects/sword/sword.tscn" id="10_3l1wq"]
+[ext_resource type="PackedScene" uid="uid://ckwtp8uhqgpu1" path="res://objects/backpack/backpack.tscn" id="10_a758s"]
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_nv4jd")
+
+[node name="MapManager" parent="." instance=ExtResource("3_46d1v")]
+unique_name_in_owner = true
+
+[node name="States" type="Node" parent="."]
+unique_name_in_owner = true
+
+[node name="InitState" parent="States" instance=ExtResource("2_0dmrj")]
+
+[node name="PlayerWaitInputState" parent="States" instance=ExtResource("3_divh0")]
+
+[node name="PickPosChooseState" parent="States" instance=ExtResource("4_6k8r0")]
+
+[node name="PickObjChooseState" parent="States" instance=ExtResource("5_563o4")]
+
+[node name="TileManager" parent="." instance=ExtResource("2_hknot")]
+unique_name_in_owner = true
+
+[node name="Map" type="Node" parent="."]
+unique_name_in_owner = true
+
+[node name="Z0" type="Node2D" parent="Map"]
+
+[node name="ZLayerComponent" parent="Map/Z0" instance=ExtResource("8_s0on6")]
+
+[node name="Player" parent="Map/Z0" instance=ExtResource("2_55r3k")]
+unique_name_in_owner = true
+
+[node name="Backpack" parent="Map/Z0/Player" instance=ExtResource("10_a758s")]
+
+[node name="Camera" type="Camera2D" parent="Map/Z0/Player"]
+
+[node name="Sword" parent="Map/Z0" instance=ExtResource("10_3l1wq")]
+z_index = 2
+position = Vector2(8, 12)
+
+[node name="Sword2" parent="Map/Z0" instance=ExtResource("10_3l1wq")]
+position = Vector2(8, 12)

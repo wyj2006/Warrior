@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b2r72cngtm6yy"]
+
+[ext_resource type="Script" path="res://states/pick_pos_choose_state/pick_pos_choose_state.gd" id="1_bxop3"]
+
+[node name="PickPosChooseState" type="Node"]
+script = ExtResource("1_bxop3")
