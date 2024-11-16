@@ -47,7 +47,6 @@ unique_name_in_owner = true
 [node name="Camera" type="Camera2D" parent="Map/Z0/Player"]
 
 [node name="Sword" parent="Map/Z0" instance=ExtResource("10_3l1wq")]
-z_index = 2
 position = Vector2(8, 12)
 
 [node name="Sword2" parent="Map/Z0" instance=ExtResource("10_3l1wq")]

@@ -1,13 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://ivwyobmwadm8"]
+[gd_scene load_steps=4 format=3 uid="uid://ivwyobmwadm8"]
 
 [ext_resource type="Script" path="res://objects/wall/wall.gd" id="1_fryx2"]
+[ext_resource type="PackedScene" uid="uid://0jtwup6xp1j2" path="res://components/tile_component/tile_component.tscn" id="2_n80jq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0of18"]
 size = Vector2(8, 12)
 
-[node name="Wall" type="Sprite2D"]
+[node name="Wall" type="Node2D"]
 z_index = 1
 script = ExtResource("1_fryx2")
+
+[node name="TileComponent" parent="." instance=ExtResource("2_n80jq")]
+id = "wall"
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
