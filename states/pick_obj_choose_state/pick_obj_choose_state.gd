@@ -39,8 +39,8 @@ func _input(_event: InputEvent) -> void:
 
 func pick_objects():
     var objects = ui.get_pick_objects()
-    var pick_component: PickComponent = origin.get_node("PickComponent")
+    #TODO: 更多选项
     var store_component: StoreComponent = origin.get_node("StoreComponent")
     var container = origin.find_child("ContainerComponent").get_parent() # TODO: 有效性检查&玩家选择容器
     for object in objects:
-        pick_component.pick(object, func(x): store_component.store(x, container))
+        store_component.store(object, container)
