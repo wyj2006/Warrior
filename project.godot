@@ -81,6 +81,10 @@ finish_pick_selection={
 
 2d_physics/layer_1="movement"
 
+[physics]
+
+2d/run_on_separate_thread=true
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"

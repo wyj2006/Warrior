@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://i4jnn73080xn"]
+
+[ext_resource type="Script" path="res://components/material_component/material_component.gd" id="1_bg3ui"]
+
+[node name="MaterialComponent" type="Node"]
+script = ExtResource("1_bg3ui")

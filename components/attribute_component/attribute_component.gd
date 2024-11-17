@@ -21,7 +21,7 @@ enum ContributeMode {
 
 var basic_value ## 基本值
 @export var contribute_mode: ContributeMode = ContributeMode.POST_ADD
-@export var contributor_paths: Array[NodePath] = [] ## 贡献者的节点路径
+@export var extern_contributors: Array[Node] = [] ## 外部的贡献者
 @export var id: String ## 用来区分不同的属性
 
 ##总的值
@@ -49,19 +49,25 @@ var value:
         return total_value
 
 ## 获取贡献者节点
-## 由直属于parent的相同类型的属性和由`contributor_paths`指定的节点构成
+## 由直属于parent的相同类型的属性和由`extern_contributors`指定的节点构成
 func get_contributors() -> Array[AttributeComponent]:
     var contributors: Array[AttributeComponent] = []
     var parent = get_parent()
-    var nodes = parent.get_children()
-    for path in contributor_paths:
-        var node = parent.get_node_or_null(path)
-        if node != null:
-            nodes.append(node)
+    var nodes = parent.get_children() + extern_contributors
+
     for node in nodes:
-        var attribute_component: AttributeComponent = node.get_node_or_null("AttrbuteComponent")
+        var attribute_component: AttributeComponent = node.get_node_or_null("AttributeComponent")
         if attribute_component == null or attribute_component == self:
             continue
         if attribute_component.id == id:
             contributors.append(attribute_component)
     return contributors
+
+## 获得所有属性
+static func get_all_attributes(node: Node) -> Array[AttributeComponent]:
+    var nodes: Array[AttributeComponent] = []
+    for child in node.get_children():
+        var attribute_component: AttributeComponent = child.get_node_or_null("AttributeComponent")
+        if attribute_component != null:
+            nodes.append(attribute_component)
+    return nodes

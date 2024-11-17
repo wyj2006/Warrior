@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bf1aktrr4854g"]
+[gd_scene load_steps=10 format=3 uid="uid://bf1aktrr4854g"]
 
 [ext_resource type="PackedScene" uid="uid://c3d7rnakxt3kg" path="res://components/item_component/item_component.tscn" id="1_34ekq"]
 [ext_resource type="Script" path="res://objects/sword/sword.gd" id="1_vkaad"]
@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://dwgxm8f4dqwom" path="res://components/volumn_component/volumn_component.tscn" id="4_8ka85"]
 [ext_resource type="PackedScene" uid="uid://6wpmy1mer2xg" path="res://components/store_component/storable.tscn" id="6_31wle"]
 [ext_resource type="PackedScene" uid="uid://0jtwup6xp1j2" path="res://components/tile_component/tile_component.tscn" id="7_758tb"]
+[ext_resource type="PackedScene" uid="uid://bgf18wiavwdny" path="res://components/iron_component/iron_component.tscn" id="8_1c5oj"]
+[ext_resource type="PackedScene" uid="uid://bypnkbvrqqnjg" path="res://components/weight_component/weight_component.tscn" id="8_mavb1"]
 
 [node name="Sword" type="Node2D"]
 z_index = 2
@@ -20,8 +22,26 @@ script = ExtResource("1_vkaad")
 basic_name = "剑"
 
 [node name="VolumnComponent" parent="." instance=ExtResource("4_8ka85")]
+basic_volumn = 0.001
 
 [node name="Storable" parent="." instance=ExtResource("6_31wle")]
 
 [node name="TileComponent" parent="." instance=ExtResource("7_758tb")]
 id = "sword"
+
+[node name="WeightComponent" parent="." node_paths=PackedStringArray("extern_contributors") instance=ExtResource("8_mavb1")]
+extern_contributors = [NodePath("../Blade/WeightComponent"), NodePath("../Hilt/WeightComponent")]
+
+[node name="Blade" type="Node" parent="."]
+
+[node name="IronComponent" parent="Blade" instance=ExtResource("8_1c5oj")]
+
+[node name="WeightComponent" parent="Blade" instance=ExtResource("8_mavb1")]
+basic_weight = 1.0
+
+[node name="Hilt" type="Node" parent="."]
+
+[node name="IronComponent" parent="Hilt" instance=ExtResource("8_1c5oj")]
+
+[node name="WeightComponent" parent="Hilt" instance=ExtResource("8_mavb1")]
+basic_weight = 0.5

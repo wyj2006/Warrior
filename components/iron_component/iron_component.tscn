@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://bgf18wiavwdny"]
+
+[ext_resource type="PackedScene" uid="uid://i4jnn73080xn" path="res://components/material_component/material_component.tscn" id="1_pwere"]
+[ext_resource type="PackedScene" uid="uid://bypnkbvrqqnjg" path="res://components/weight_component/weight_component.tscn" id="2_dtaor"]
+
+[node name="IronComponent" type="Node"]
+
+[node name="MaterialComponent" parent="." instance=ExtResource("1_pwere")]
+
+[node name="WeightComponent" parent="." instance=ExtResource("2_dtaor")]
+basic_weight = 1.5
+contribute_mode = 2

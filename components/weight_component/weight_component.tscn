@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bypnkbvrqqnjg"]
+
+[ext_resource type="Script" path="res://components/weight_component/weight_component.gd" id="1_lxpgg"]
+[ext_resource type="PackedScene" uid="uid://dek0v7cuu66er" path="res://components/attribute_component/attribute_component.tscn" id="1_tk4hf"]
+
+[node name="WeightComponent" type="Node"]
+script = ExtResource("1_lxpgg")
+
+[node name="AttributeComponent" parent="." instance=ExtResource("1_tk4hf")]
+id = "weight"
