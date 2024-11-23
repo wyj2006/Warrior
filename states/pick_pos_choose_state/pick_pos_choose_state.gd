@@ -1,7 +1,7 @@
 extends Node
 
 @onready var game: Game = $/root/Game
-@onready var pick_obj_choose_state: PickObjCHooseState = $/root/Game/%States/PickObjChooseState
+@onready var pick_obj_choose_state: PickObjChooseState = $/root/Game/%States/PickObjChooseState
 @onready var ui = preload("res://states/pick_pos_choose_state/pick_pos_choose_ui.tscn").instantiate()
 
 

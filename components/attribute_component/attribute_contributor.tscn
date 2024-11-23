@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://st6m8e5jsnxe"]
+
+[ext_resource type="Script" path="res://components/attribute_component/attribute_contributor.gd" id="1_uqm35"]
+
+[node name="AttributeContributor" type="Node"]
+script = ExtResource("1_uqm35")

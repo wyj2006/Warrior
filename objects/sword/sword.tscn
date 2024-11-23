@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bf1aktrr4854g"]
+[gd_scene load_steps=11 format=3 uid="uid://bf1aktrr4854g"]
 
 [ext_resource type="PackedScene" uid="uid://c3d7rnakxt3kg" path="res://components/item_component/item_component.tscn" id="1_34ekq"]
 [ext_resource type="Script" path="res://objects/sword/sword.gd" id="1_vkaad"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://0jtwup6xp1j2" path="res://components/tile_component/tile_component.tscn" id="7_758tb"]
 [ext_resource type="PackedScene" uid="uid://bgf18wiavwdny" path="res://components/iron_component/iron_component.tscn" id="8_1c5oj"]
 [ext_resource type="PackedScene" uid="uid://bypnkbvrqqnjg" path="res://components/weight_component/weight_component.tscn" id="8_mavb1"]
+[ext_resource type="PackedScene" uid="uid://st6m8e5jsnxe" path="res://components/attribute_component/attribute_contributor.tscn" id="9_5uovb"]
 
 [node name="Sword" type="Node2D"]
 z_index = 2
@@ -29,8 +30,13 @@ basic_volumn = 0.001
 [node name="TileComponent" parent="." instance=ExtResource("7_758tb")]
 id = "sword"
 
-[node name="WeightComponent" parent="." node_paths=PackedStringArray("extern_contributors") instance=ExtResource("8_mavb1")]
-extern_contributors = [NodePath("../Blade/WeightComponent"), NodePath("../Hilt/WeightComponent")]
+[node name="WeightComponent" parent="." instance=ExtResource("8_mavb1")]
+
+[node name="ContributedFromBlade" parent="WeightComponent" node_paths=PackedStringArray("attribute") instance=ExtResource("9_5uovb")]
+attribute = NodePath("../../Blade/WeightComponent")
+
+[node name="ContributedFromHilt" parent="WeightComponent" node_paths=PackedStringArray("attribute") instance=ExtResource("9_5uovb")]
+attribute = NodePath("../../Hilt/WeightComponent")
 
 [node name="Blade" type="Node" parent="."]
 

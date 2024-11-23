@@ -1,6 +1,6 @@
 extends Node
 
-class_name PickObjCHooseState
+class_name PickObjChooseState
 
 @onready var origin = $/root/Game/%Player # 起点
 @onready var direction = Vector2(0, 0) # 方向
