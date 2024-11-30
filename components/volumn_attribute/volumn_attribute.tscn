@@ -1,9 +1,9 @@
 [gd_scene load_steps=3 format=3 uid="uid://dwgxm8f4dqwom"]
 
-[ext_resource type="Script" path="res://components/volumn_component/volumn_component.gd" id="1_8qpue"]
+[ext_resource type="Script" path="res://components/volumn_attribute/volumn_attribute.gd" id="1_8qpue"]
 [ext_resource type="PackedScene" uid="uid://dek0v7cuu66er" path="res://components/attribute_component/attribute_component.tscn" id="2_vehib"]
 
-[node name="VolumnComponent" type="Node"]
+[node name="VolumnAttribute" type="Node"]
 script = ExtResource("1_8qpue")
 
 [node name="AttributeComponent" parent="." instance=ExtResource("2_vehib")]

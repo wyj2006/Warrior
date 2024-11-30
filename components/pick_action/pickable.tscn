@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c78osp3albyss"]
 
-[ext_resource type="Script" path="res://components/pick_component/pickable.gd" id="1_luyvw"]
+[ext_resource type="Script" path="res://components/pick_action/pickable.gd" id="1_luyvw"]
 
 [node name="Pickable" type="Node"]
 script = ExtResource("1_luyvw")

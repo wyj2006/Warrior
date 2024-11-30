@@ -1,11 +1,11 @@
 extends CharacterBody2D
 
 ## 移动组件
-## 用于移动, 速度由SpeedComponent提供
+## 用于移动, 速度由SpeedAttribute提供
 
 var speed: float:
     get:
-        var speed_component = get_parent().get_node_or_null("SpeedComponent")
+        var speed_component = get_parent().get_node_or_null("SpeedAttribute")
         if speed_component == null:
             return 0
         return speed_component.speed

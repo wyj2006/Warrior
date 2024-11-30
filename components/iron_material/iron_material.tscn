@@ -2,15 +2,15 @@
 
 [ext_resource type="PackedScene" uid="uid://st6m8e5jsnxe" path="res://components/attribute_component/attribute_contributor.tscn" id="1_2ckfv"]
 [ext_resource type="PackedScene" uid="uid://i4jnn73080xn" path="res://components/material_component/material_component.tscn" id="1_pwere"]
-[ext_resource type="PackedScene" uid="uid://bypnkbvrqqnjg" path="res://components/weight_component/weight_component.tscn" id="2_dtaor"]
+[ext_resource type="PackedScene" uid="uid://bypnkbvrqqnjg" path="res://components/weight_attribute/weight_attribute.tscn" id="2_dtaor"]
 
-[node name="IronComponent" type="Node"]
+[node name="IronMaterial" type="Node"]
 
 [node name="MaterialComponent" parent="." instance=ExtResource("1_pwere")]
 
 [node name="ContributeWeight" parent="." node_paths=PackedStringArray("attribute") instance=ExtResource("1_2ckfv")]
 contribute_mode = 2
-attribute = NodePath("WeightComponent")
+attribute = NodePath("WeightAttribute")
 
-[node name="WeightComponent" parent="ContributeWeight" instance=ExtResource("2_dtaor")]
+[node name="WeightAttribute" parent="ContributeWeight" instance=ExtResource("2_dtaor")]
 basic_weight = 1.5

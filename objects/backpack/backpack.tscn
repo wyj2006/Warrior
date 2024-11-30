@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://ckwtp8uhqgpu1"]
 
 [ext_resource type="Script" path="res://objects/backpack/backpack.gd" id="1_ujwui"]
-[ext_resource type="PackedScene" uid="uid://d1775i78g6ie7" path="res://components/name_component/name_component.tscn" id="2_1ap62"]
+[ext_resource type="PackedScene" uid="uid://d1775i78g6ie7" path="res://components/name_attribute/name_attribute.tscn" id="2_1ap62"]
 [ext_resource type="PackedScene" uid="uid://cxl07qxtcsprt" path="res://components/container_component/container_component.tscn" id="3_b36mh"]
 [ext_resource type="PackedScene" uid="uid://c3d7rnakxt3kg" path="res://components/item_component/item_component.tscn" id="4_bd70p"]
 [ext_resource type="PackedScene" uid="uid://0jtwup6xp1j2" path="res://components/tile_component/tile_component.tscn" id="5_8jvyt"]
@@ -10,7 +10,7 @@
 z_index = 2
 script = ExtResource("1_ujwui")
 
-[node name="NameComponent" parent="." instance=ExtResource("2_1ap62")]
+[node name="NameAttribute" parent="." instance=ExtResource("2_1ap62")]
 basic_name = "背包"
 
 [node name="ContainerComponent" parent="." instance=ExtResource("3_b36mh")]

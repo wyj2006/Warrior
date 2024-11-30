@@ -26,4 +26,4 @@ func _input(_event: InputEvent) -> void:
     elif Input.is_action_pressed("pick"):
         game.cur_state = $%States/PickPosChooseState
     if direction:
-        $/root/Game/%Player/MoveComponent.move(direction)
+        $/root/Game/%Player/MoveAction.move(direction)

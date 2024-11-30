@@ -1,9 +1,9 @@
 [gd_scene load_steps=3 format=3 uid="uid://d1775i78g6ie7"]
 
-[ext_resource type="Script" path="res://components/name_component/name_component.gd" id="1_3dv0v"]
+[ext_resource type="Script" path="res://components/name_attribute/name_attribute.gd" id="1_3dv0v"]
 [ext_resource type="PackedScene" uid="uid://dek0v7cuu66er" path="res://components/attribute_component/attribute_component.tscn" id="2_haj33"]
 
-[node name="NameComponent" type="Node"]
+[node name="NameAttribute" type="Node"]
 script = ExtResource("1_3dv0v")
 
 [node name="AttributeComponent" parent="." instance=ExtResource("2_haj33")]

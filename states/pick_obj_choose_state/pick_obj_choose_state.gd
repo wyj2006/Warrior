@@ -12,7 +12,7 @@ class_name PickObjChooseState
 func _process(_delta: float) -> void:
     if game.cur_state != self:
         disable_ui()
-    elif not PickComponent.can_pick(origin) or not StoreComponent.can_store(origin):
+    elif not PickAction.can_pick(origin) or not StoreAction.can_store(origin):
         game.cur_state = $/root/Game/%States/PlayerWaitInputState
         print("无法切换到PickObjChooseState")
         #TODO: 提示信息
@@ -40,7 +40,7 @@ func _input(_event: InputEvent) -> void:
 func pick_objects():
     var objects = ui.get_pick_objects()
     #TODO: 更多选项
-    var store_component: StoreComponent = origin.get_node("StoreComponent")
+    var store_component: StoreAction = origin.get_node("StoreAction")
     var container = origin.find_child("ContainerComponent").get_parent() # TODO: 有效性检查&玩家选择容器
     for object in objects:
         store_component.store(object, container)

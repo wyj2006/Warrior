@@ -12,11 +12,11 @@ func _ready() -> void:
     var origin_pos: Vector3 = map_manager.get_tilemap_position(origin)
     var pos = origin_pos + Vector3(direction.x, direction.y, 0)
 
-    pickable_nodes = map_manager.get_node_at_pos(pos).filter(func(x): return StoreComponent.can_be_stored(origin, x))
+    pickable_nodes = map_manager.get_node_at_pos(pos).filter(func(x): return StoreAction.can_be_stored(origin, x))
 
     for i in pickable_nodes:
         var view = PickableObjectViewScene.instantiate()
-        view.text = NameComponent.get_self_name(i)
+        view.text = NameAttribute.get_self_name(i)
         view.object = i
         $"%PickableObjectContainer".add_child(view)
 

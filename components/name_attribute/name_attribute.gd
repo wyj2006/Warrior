@@ -1,6 +1,6 @@
 extends Node
 
-class_name NameComponent
+class_name NameAttribute
 
 @export var basic_name: String:
     get:
@@ -13,7 +13,7 @@ var self_name: String:
         return $AttributeComponent.value
 
 static func get_self_name(node: Node):
-    var name_component: NameComponent = node.get_node("NameComponent")
+    var name_component: NameAttribute = node.get_node("NameAttribute")
     if name_component != null:
         return name_component.self_name
     return node.to_string()

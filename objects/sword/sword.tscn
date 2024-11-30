@@ -2,13 +2,13 @@
 
 [ext_resource type="PackedScene" uid="uid://c3d7rnakxt3kg" path="res://components/item_component/item_component.tscn" id="1_34ekq"]
 [ext_resource type="Script" path="res://objects/sword/sword.gd" id="1_vkaad"]
-[ext_resource type="PackedScene" uid="uid://c78osp3albyss" path="res://components/pick_component/pickable.tscn" id="2_e67fo"]
-[ext_resource type="PackedScene" uid="uid://d1775i78g6ie7" path="res://components/name_component/name_component.tscn" id="3_q0fxr"]
-[ext_resource type="PackedScene" uid="uid://dwgxm8f4dqwom" path="res://components/volumn_component/volumn_component.tscn" id="4_8ka85"]
-[ext_resource type="PackedScene" uid="uid://6wpmy1mer2xg" path="res://components/store_component/storable.tscn" id="6_31wle"]
+[ext_resource type="PackedScene" uid="uid://c78osp3albyss" path="res://components/pick_action/pickable.tscn" id="2_e67fo"]
+[ext_resource type="PackedScene" uid="uid://d1775i78g6ie7" path="res://components/name_attribute/name_attribute.tscn" id="3_q0fxr"]
+[ext_resource type="PackedScene" uid="uid://dwgxm8f4dqwom" path="res://components/volumn_attribute/volumn_attribute.tscn" id="4_8ka85"]
+[ext_resource type="PackedScene" uid="uid://6wpmy1mer2xg" path="res://components/store_action/storable.tscn" id="6_31wle"]
 [ext_resource type="PackedScene" uid="uid://0jtwup6xp1j2" path="res://components/tile_component/tile_component.tscn" id="7_758tb"]
-[ext_resource type="PackedScene" uid="uid://bgf18wiavwdny" path="res://components/iron_component/iron_component.tscn" id="8_1c5oj"]
-[ext_resource type="PackedScene" uid="uid://bypnkbvrqqnjg" path="res://components/weight_component/weight_component.tscn" id="8_mavb1"]
+[ext_resource type="PackedScene" uid="uid://bgf18wiavwdny" path="res://components/iron_material/iron_material.tscn" id="8_1c5oj"]
+[ext_resource type="PackedScene" uid="uid://bypnkbvrqqnjg" path="res://components/weight_attribute/weight_attribute.tscn" id="8_mavb1"]
 [ext_resource type="PackedScene" uid="uid://st6m8e5jsnxe" path="res://components/attribute_component/attribute_contributor.tscn" id="9_5uovb"]
 
 [node name="Sword" type="Node2D"]
@@ -19,10 +19,10 @@ script = ExtResource("1_vkaad")
 
 [node name="Pickable" parent="." instance=ExtResource("2_e67fo")]
 
-[node name="NameComponent" parent="." instance=ExtResource("3_q0fxr")]
+[node name="NameAttribute" parent="." instance=ExtResource("3_q0fxr")]
 basic_name = "剑"
 
-[node name="VolumnComponent" parent="." instance=ExtResource("4_8ka85")]
+[node name="VolumnAttribute" parent="." instance=ExtResource("4_8ka85")]
 basic_volumn = 0.001
 
 [node name="Storable" parent="." instance=ExtResource("6_31wle")]
@@ -30,24 +30,24 @@ basic_volumn = 0.001
 [node name="TileComponent" parent="." instance=ExtResource("7_758tb")]
 id = "sword"
 
-[node name="WeightComponent" parent="." instance=ExtResource("8_mavb1")]
+[node name="WeightAttribute" parent="." instance=ExtResource("8_mavb1")]
 
-[node name="ContributedFromBlade" parent="WeightComponent" node_paths=PackedStringArray("attribute") instance=ExtResource("9_5uovb")]
-attribute = NodePath("../../Blade/WeightComponent")
+[node name="ContributedFromBlade" parent="WeightAttribute" node_paths=PackedStringArray("attribute") instance=ExtResource("9_5uovb")]
+attribute = NodePath("../../Blade/WeightAttribute")
 
-[node name="ContributedFromHilt" parent="WeightComponent" node_paths=PackedStringArray("attribute") instance=ExtResource("9_5uovb")]
-attribute = NodePath("../../Hilt/WeightComponent")
+[node name="ContributedFromHilt" parent="WeightAttribute" node_paths=PackedStringArray("attribute") instance=ExtResource("9_5uovb")]
+attribute = NodePath("../../Hilt/WeightAttribute")
 
 [node name="Blade" type="Node" parent="."]
 
-[node name="IronComponent" parent="Blade" instance=ExtResource("8_1c5oj")]
+[node name="IronMaterial" parent="Blade" instance=ExtResource("8_1c5oj")]
 
-[node name="WeightComponent" parent="Blade" instance=ExtResource("8_mavb1")]
+[node name="WeightAttribute" parent="Blade" instance=ExtResource("8_mavb1")]
 basic_weight = 1.0
 
 [node name="Hilt" type="Node" parent="."]
 
-[node name="IronComponent" parent="Hilt" instance=ExtResource("8_1c5oj")]
+[node name="IronMaterial" parent="Hilt" instance=ExtResource("8_1c5oj")]
 
-[node name="WeightComponent" parent="Hilt" instance=ExtResource("8_mavb1")]
+[node name="WeightAttribute" parent="Hilt" instance=ExtResource("8_mavb1")]
 basic_weight = 0.5

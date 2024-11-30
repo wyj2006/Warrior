@@ -1,6 +1,6 @@
 extends Node
 
-class_name PickComponent
+class_name PickAction
 
 ## 拾起组件
 ## 用来进行拾取操作和判断是否可以拾取
@@ -14,7 +14,7 @@ static func can_be_picked(node: Node):
 
 ##可以拾取
 static func can_pick(node: Node):
-    return node.get_node_or_null("PickComponent") != null
+    return node.get_node_or_null("PickAction") != null
 
 ## 拾取
 ## 第一个参数为拾取的物品, 第二个参数为拾取后要做的事

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dr54fskhkn0m5"]
+
+[ext_resource type="Script" path="res://components/pick_action/pick_action.gd" id="1_atq82"]
+
+[node name="PickAction" type="Node"]
+script = ExtResource("1_atq82")
