@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://u8w442a0a3b6"]
+
+[ext_resource type="Script" path="res://components/wear_action/wear_action.gd" id="1_n2u2d"]
+
+[node name="WearAction" type="Node"]
+script = ExtResource("1_n2u2d")

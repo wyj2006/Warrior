@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bho8vb1xni3n0"]
+[gd_scene load_steps=10 format=3 uid="uid://bho8vb1xni3n0"]
 
 [ext_resource type="Script" path="res://objects/player/player.gd" id="2_20gqe"]
 [ext_resource type="PackedScene" uid="uid://c18a53ikwaqwk" path="res://components/speed_attribute/speed_attribute.tscn" id="2_rrrsq"]
@@ -6,6 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://cpxome1m0hc5k" path="res://components/store_action/store_action.tscn" id="3_xp4n5"]
 [ext_resource type="PackedScene" uid="uid://dr54fskhkn0m5" path="res://components/pick_action/pick_action.tscn" id="5_egvf6"]
 [ext_resource type="PackedScene" uid="uid://0jtwup6xp1j2" path="res://components/tile_component/tile_component.tscn" id="6_tugms"]
+[ext_resource type="PackedScene" uid="uid://bery38io2ch0i" path="res://components/bodypart_component/bodypart_component.tscn" id="7_76no4"]
+[ext_resource type="PackedScene" uid="uid://u8w442a0a3b6" path="res://components/wear_action/wear_action.tscn" id="7_l2ljr"]
+[ext_resource type="PackedScene" uid="uid://d1775i78g6ie7" path="res://components/name_attribute/name_attribute.tscn" id="9_2woc5"]
 
 [node name="Player" type="Node2D"]
 z_index = 2
@@ -22,3 +25,13 @@ basic_speed = 1.0
 
 [node name="TileComponent" parent="." instance=ExtResource("6_tugms")]
 id = "player"
+
+[node name="WearAction" parent="." instance=ExtResource("7_l2ljr")]
+
+[node name="Body" type="Node2D" parent="."]
+
+[node name="BodypartComponent" parent="Body" instance=ExtResource("7_76no4")]
+wearable_ids = Array[String](["backpack"])
+
+[node name="NameAttribute" parent="Body" instance=ExtResource("9_2woc5")]
+basic_name = "身体"

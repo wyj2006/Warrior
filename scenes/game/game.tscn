@@ -42,8 +42,6 @@ unique_name_in_owner = true
 [node name="Player" parent="Map/Z0" instance=ExtResource("2_55r3k")]
 unique_name_in_owner = true
 
-[node name="Backpack" parent="Map/Z0/Player" instance=ExtResource("10_a758s")]
-
 [node name="Camera" type="Camera2D" parent="Map/Z0/Player"]
 
 [node name="Sword" parent="Map/Z0" instance=ExtResource("10_3l1wq")]
@@ -51,3 +49,5 @@ position = Vector2(8, 12)
 
 [node name="Sword2" parent="Map/Z0" instance=ExtResource("10_3l1wq")]
 position = Vector2(8, 12)
+
+[node name="Backpack" parent="Map/Z0" instance=ExtResource("10_a758s")]

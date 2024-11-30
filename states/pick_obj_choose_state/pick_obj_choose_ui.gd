@@ -5,7 +5,12 @@ class_name PickObjChooseUi
 @onready var map_manager: MapManager = $/root/Game/%MapManager
 @onready var origin: Node2D = get_parent().origin
 @onready var direction: Vector2 = get_parent().direction
-@onready var all_containers = origin.find_children("ContainerComponent") as Array[ContainerComponent]
+@onready var all_containers:
+    get:
+        return origin.find_children("ContainerComponent") as Array[ContainerComponent]
+@onready var all_bodyparts:
+    get:
+        return origin.find_children("BodypartComponent") as Array[BodypartComponent]
 
 var item_action = {}
 var pickable_nodes
@@ -26,14 +31,23 @@ func _ready() -> void:
         var object_item = $"%PickableObjects".create_item(root)
         object_item.set_text(0, NameAttribute.get_self_name(node))
         object_item.set_selectable(0, false)
-
-        if StoreAction.can_be_stored(origin, node):
+        
+        if StoreAction.can_store(origin) and StoreAction.can_be_stored(origin, node):
             for container in all_containers:
                 var action_item = $"%PickableObjects".create_item(object_item)
                 action_item.set_text(0, "存入 " + NameAttribute.get_self_name(container.get_parent()))
                 item_action[action_item] = func():
                     var store_action: StoreAction = origin.get_node("StoreAction")
                     store_action.store(node, container.get_parent())
+        if WearAction.can_wear(origin) and WearAction.can_be_wore(origin, node):
+            for bodypart in all_bodyparts:
+                if not bodypart.is_valid(node):
+                    continue
+                var action_item = $"%PickableObjects".create_item(object_item)
+                action_item.set_text(0, "穿在 " + NameAttribute.get_self_name(bodypart.get_parent()) + " 上")
+                item_action[action_item] = func():
+                    var wear_action: WearAction = origin.get_node("WearAction")
+                    wear_action.wear(node, bodypart.get_parent())
 
 func _process(_delta: float) -> void:
     update_item_states()
@@ -42,7 +56,8 @@ func _process(_delta: float) -> void:
 func get_actions():
     var actions = []
     for item in selected_items.values():
-        actions.append(item_action[item])
+        if item in item_action:
+            actions.append(item_action[item])
     return actions
 
 func update_item_states():
@@ -57,7 +72,7 @@ func update_item_states():
 ## 如果已经被选中, 那么就取消选中
 func select(item: TreeItem):
     var parent = item.get_parent()
-    if parent in selected_items:
+    if parent in selected_items and selected_items[parent] == item:
         selected_items.erase(parent)
     else:
         selected_items[parent] = item

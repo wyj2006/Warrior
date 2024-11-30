@@ -28,3 +28,4 @@ func store(node: Node, container: Node):
     if node_parent != null:
         node_parent.remove_child(node)
     container.add_child(node)
+    node.owner = container
