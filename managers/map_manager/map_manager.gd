@@ -9,7 +9,7 @@ class_name MapManager
 @onready var map = $/root/Game/%Map
 @onready var FloorScene = preload("res://objects/floor/floor.tscn")
 @onready var WallScene = preload("res://objects/wall/wall.tscn")
-@onready var ZLayerComponentScene = preload("res://components/zlayer_component/z_layer_component.tscn")
+@onready var ZLayerComponentScene = preload("res://components/z_layer_component/z_layer_component.tscn")
 
 var z_layers: Dictionary = {}
 ##各个z坐标的实际二维坐标
@@ -17,8 +17,8 @@ var z_coord_position: Dictionary = {}
 
 func _ready() -> void:
     ## 扫描Map
-    for z_layer_component in $/root/Game/%Map.find_children("ZLayerComponent"):
-        add_z_layer(z_layer_component)
+    for z_layer in $/root/Game/%Map.find_children("ZLayerComponent"):
+        add_z_layer(z_layer)
 
     for i in range(10):
         for j in range(10):
@@ -28,9 +28,20 @@ func _ready() -> void:
     var wall = WallScene.instantiate()
     add_node(wall, Vector3(5, 5, 0))
 
+## 获取全局的z坐标
+func get_global_z_coord(z_layer: ZLayerComponent):
+    var z_coord = 0
+    var p = z_layer.get_parent()
+    while p != null:
+        z_layer = p.get_node_or_null("ZLayerComponent")
+        if z_layer != null:
+            z_coord += z_layer.z_coord
+        p = p.get_parent()
+    return z_coord
+
 ## 加入一个z_layer
 func add_z_layer(z_layer: ZLayerComponent):
-    var z_coord = z_layer.z_coordinate
+    var z_coord = get_global_z_coord(z_layer)
 
     if z_coord not in z_layers:
         z_layers[z_coord] = []
@@ -42,14 +53,16 @@ func add_z_layer(z_layer: ZLayerComponent):
     else:
         z_layers[z_coord].append(z_layer)
 
-    if z_coord not in z_coord_position:
-        z_coord_position[z_coord] = Vector2(z_coord, z_coord * 100) # TODO:
+## 移除一个z_layer
+func remove_z_layer(z_layer: ZLayerComponent):
+    var z_coord = get_global_z_coord(z_layer)
+    z_layers[z_coord].erase(z_layer)
 
 ## 创建一个新的直属于Map的z_layer
 func create_new_zlayer(z_coord: float):
     var z = Node2D.new()
     var z_layer: ZLayerComponent = ZLayerComponentScene.instantiate()
-    z_layer.z_coordinate = z_coord
+    z_layer.z_coord = z_coord
     z.add_child(z_layer)
     $/root/Game/%Map.add_child(z)
     add_z_layer(z_layer)
@@ -57,9 +70,8 @@ func create_new_zlayer(z_coord: float):
 ##查看z_layer是否存在
 ##如果不存在就创建
 func check_z_layer(z_layer: ZLayerComponent):
-    var z_coord = z_layer.z_coordinate
-    if z_coord not in z_layers:
-        create_new_zlayer(z_coord)
+    var z_coord = get_global_z_coord(z_layer)
+    check_z_coord(z_coord)
     if z_layer not in z_layers[z_coord]:
         add_z_layer(z_layer)
 
@@ -69,9 +81,8 @@ func check_z_coord(z_coord: float):
 
 ## 获取z_layer的实际二维坐标
 func get_z_layer_position(z_layer: ZLayerComponent) -> Vector2:
-    check_z_layer(z_layer)
-    var z_coord = z_layer.z_coordinate
-    return z_coord_position[z_coord]
+    var z_coord = get_global_z_coord(z_layer)
+    return Vector2(0, z_coord * 100) # TODO:
 
 func add_node(node: Node2D, pos: Vector3):
     check_z_coord(pos.z)
@@ -100,9 +111,9 @@ func get_tilemap_position(node: Node2D) -> Vector3:
 
     var p = node.get_parent()
     while p != null:
-        var z_layer_component: ZLayerComponent = p.get_node_or_null("ZLayerComponent")
-        if z_layer_component != null:
-            z = z_layer_component.z_coordinate
+        var z_layer: ZLayerComponent = p.get_node_or_null("ZLayerComponent")
+        if z_layer != null:
+            z = get_global_z_coord(z_layer)
             break
         p = p.get_parent()
     return Vector3(x, y, z)
