@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://3wbmwvlq6ncr"]
+
+[ext_resource type="Script" path="res://components/volumn_attribute/max_volumn_attribute.gd" id="1_2g3qu"]
+[ext_resource type="PackedScene" uid="uid://dek0v7cuu66er" path="res://components/attribute_component/attribute_component.tscn" id="1_wci07"]
+
+[node name="MaxVolumnAttribute" type="Node"]
+script = ExtResource("1_2g3qu")
+
+[node name="AttributeComponent" parent="." instance=ExtResource("1_wci07")]

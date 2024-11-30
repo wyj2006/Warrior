@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://cehlx0h4qfp6i"]
+[gd_scene load_steps=4 format=3 uid="uid://cehlx0h4qfp6i"]
 
 [ext_resource type="Script" path="res://states/pick_obj_choose_state/pick_obj_choose_ui.gd" id="1_j77f8"]
+[ext_resource type="Theme" uid="uid://c1f1bh6ljnu8t" path="res://themes/default_theme.tres" id="2_digeo"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0lrx7"]
 
 [node name="PickObjChooseUi" type="CanvasLayer"]
 script = ExtResource("1_j77f8")
@@ -11,15 +14,17 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_digeo")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer"]
 layout_mode = 2
-mouse_filter = 2
-follow_focus = true
-horizontal_scroll_mode = 0
-vertical_scroll_mode = 3
 
-[node name="PickableObjectContainer" type="VBoxContainer" parent="MarginContainer/ScrollContainer"]
+[node name="PickableObjects" type="Tree" parent="MarginContainer/ScrollContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/font_selected_color = Color(0, 1, 0, 1)
+theme_override_styles/selected_focus = SubResource("StyleBoxEmpty_0lrx7")
+hide_root = true
+select_mode = 2

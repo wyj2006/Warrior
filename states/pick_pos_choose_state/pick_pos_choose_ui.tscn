@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://b1vbw7o5vm5nt"]
 
 [ext_resource type="Script" path="res://states/pick_pos_choose_state/pick_pos_choose_ui.gd" id="1_dc30e"]
-[ext_resource type="FontFile" uid="uid://d32tns028vqyc" path="res://asserts/font/minecraft.ttf" id="2_pycqb"]
+[ext_resource type="Theme" uid="uid://c1f1bh6ljnu8t" path="res://themes/default_theme.tres" id="2_di2r6"]
 
 [node name="PickPosChooseUi" type="CanvasLayer"]
 script = ExtResource("1_dc30e")
@@ -12,13 +12,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_di2r6")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 
 [node name="LabelQue" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_pycqb")
 text = "选择哪个方向?"
 horizontal_alignment = 1
 
@@ -29,12 +29,10 @@ alignment = 1
 
 [node name="LabelKey" type="Label" parent="MarginContainer/VBoxContainer/Up"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_pycqb")
 horizontal_alignment = 1
 
 [node name="LabelAction" type="Label" parent="MarginContainer/VBoxContainer/Up"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_pycqb")
 text = "上"
 horizontal_alignment = 1
 
@@ -45,12 +43,10 @@ alignment = 1
 
 [node name="LabelKey" type="Label" parent="MarginContainer/VBoxContainer/Down"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_pycqb")
 horizontal_alignment = 1
 
 [node name="LabelAction" type="Label" parent="MarginContainer/VBoxContainer/Down"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_pycqb")
 text = "下"
 horizontal_alignment = 1
 
@@ -61,12 +57,10 @@ alignment = 1
 
 [node name="LabelKey" type="Label" parent="MarginContainer/VBoxContainer/Right"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_pycqb")
 horizontal_alignment = 1
 
 [node name="LabelAction" type="Label" parent="MarginContainer/VBoxContainer/Right"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_pycqb")
 text = "右"
 horizontal_alignment = 1
 
@@ -77,12 +71,10 @@ alignment = 1
 
 [node name="LabelKey" type="Label" parent="MarginContainer/VBoxContainer/Left"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_pycqb")
 horizontal_alignment = 1
 
 [node name="LabelAction" type="Label" parent="MarginContainer/VBoxContainer/Left"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_pycqb")
 text = "左"
 horizontal_alignment = 1
 
@@ -93,12 +85,10 @@ alignment = 1
 
 [node name="LabelKey" type="Label" parent="MarginContainer/VBoxContainer/UpRight"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_pycqb")
 horizontal_alignment = 1
 
 [node name="LabelAction" type="Label" parent="MarginContainer/VBoxContainer/UpRight"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_pycqb")
 text = "右上"
 horizontal_alignment = 1
 
@@ -109,12 +99,10 @@ alignment = 1
 
 [node name="LabelKey" type="Label" parent="MarginContainer/VBoxContainer/UpLeft"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_pycqb")
 horizontal_alignment = 1
 
 [node name="LabelAction" type="Label" parent="MarginContainer/VBoxContainer/UpLeft"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_pycqb")
 text = "左上"
 horizontal_alignment = 1
 
@@ -125,12 +113,10 @@ alignment = 1
 
 [node name="LabelKey" type="Label" parent="MarginContainer/VBoxContainer/DownRight"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_pycqb")
 horizontal_alignment = 1
 
 [node name="LabelAction" type="Label" parent="MarginContainer/VBoxContainer/DownRight"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_pycqb")
 text = "右下"
 horizontal_alignment = 1
 
@@ -141,11 +127,9 @@ alignment = 1
 
 [node name="LabelKey" type="Label" parent="MarginContainer/VBoxContainer/DownLeft"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_pycqb")
 horizontal_alignment = 1
 
 [node name="LabelAction" type="Label" parent="MarginContainer/VBoxContainer/DownLeft"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_pycqb")
 text = "左下"
 horizontal_alignment = 1

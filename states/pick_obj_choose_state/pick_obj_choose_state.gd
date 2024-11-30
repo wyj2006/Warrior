@@ -12,10 +12,8 @@ class_name PickObjChooseState
 func _process(_delta: float) -> void:
     if game.cur_state != self:
         disable_ui()
-    elif not PickAction.can_pick(origin) or not StoreAction.can_store(origin):
-        game.cur_state = $/root/Game/%States/PlayerWaitInputState
-        print("无法切换到PickObjChooseState")
-        #TODO: 提示信息
+    elif not PickAction.can_pick(origin):
+        $"%UnableTip".show()
     else:
         enable_ui()
 
@@ -23,8 +21,10 @@ func disable_ui():
     if ui != null and ui.get_parent() == self:
         remove_child(ui)
         ui = null
+    $"%UnableTip".hide()
 
 func enable_ui():
+    $"%UnableTip".hide()
     if ui != null:
         return
     ui = UiScene.instantiate()
@@ -38,9 +38,8 @@ func _input(_event: InputEvent) -> void:
         game.cur_state = $/root/Game/%States/PlayerWaitInputState
 
 func pick_objects():
-    var objects = ui.get_pick_objects()
-    #TODO: 更多选项
-    var store_component: StoreAction = origin.get_node("StoreAction")
-    var container = origin.find_child("ContainerComponent").get_parent() # TODO: 有效性检查&玩家选择容器
-    for object in objects:
-        store_component.store(object, container)
+    if ui == null: # 可能是因无法捡起而导致的
+        return
+    var actions = ui.get_actions()
+    for action in actions:
+        action.call()
