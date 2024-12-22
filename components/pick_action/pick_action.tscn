@@ -1,6 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://dr54fskhkn0m5"]
+[gd_scene load_steps=3 format=3 uid="uid://dr54fskhkn0m5"]
 
 [ext_resource type="Script" path="res://components/pick_action/pick_action.gd" id="1_atq82"]
 
-[node name="PickAction" type="Node"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8oo0x"]
+size = Vector2(8, 12)
+
+[node name="PickAction" type="Area2D"]
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("1_atq82")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_8oo0x")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]

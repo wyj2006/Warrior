@@ -8,6 +8,5 @@ var stored: bool:
 func _process(_delta: float) -> void:
     if stored:
         get_parent().hide()
-        get_parent().position = Vector2(0, 0)
     else:
         get_parent().show()

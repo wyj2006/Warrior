@@ -28,3 +28,5 @@ func wear(node: Node, bodypart: Node):
         node_parent.remove_child(node)
     bodypart.add_child(node)
     node.owner = bodypart
+    if node is Node2D:
+        node.position = Vector2(0, 0)

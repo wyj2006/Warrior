@@ -21,7 +21,8 @@ func _ready() -> void:
     var origin_pos: Vector3 = map_manager.get_tilemap_position(origin)
     var pos = origin_pos + Vector3(direction.x, direction.y, 0)
 
-    pickable_nodes = map_manager.get_node_at_pos(pos)
+    pickable_nodes = (origin.get_node("PickAction") as PickAction).pickable_objects
+    pickable_nodes = pickable_nodes.filter(func(x): return map_manager.get_tilemap_position(x) == pos)
 
     var root = $"%PickableObjects".create_item()
 

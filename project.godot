@@ -80,6 +80,7 @@ finish_pick_selection={
 [layer_names]
 
 2d_physics/layer_1="movement"
+2d_physics/layer_2="pick"
 
 [physics]
 
