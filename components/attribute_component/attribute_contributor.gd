@@ -18,6 +18,7 @@ enum ContributeMode {
 
 @export var contribute_mode: ContributeMode = ContributeMode.POST_ADD
 @export var attribute: Node
+@export var source: Node
 ## 处理得到的值
 var value_process: Callable = func(x): return x
 

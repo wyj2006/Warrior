@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://co78v6keepvkl"]
+[gd_scene load_steps=14 format=3 uid="uid://co78v6keepvkl"]
 
 [ext_resource type="Script" path="res://scenes/game/game.gd" id="1_nv4jd"]
 [ext_resource type="PackedScene" uid="uid://ia1s0m4hg1sr" path="res://states/init_state/init_state.tscn" id="2_0dmrj"]
@@ -8,7 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://2ikf7jqv3dm8" path="res://states/player_wait_input_state/player_wait_input_state.tscn" id="3_divh0"]
 [ext_resource type="PackedScene" uid="uid://b2r72cngtm6yy" path="res://states/pick_pos_choose_state/pick_pos_choose_state.tscn" id="4_6k8r0"]
 [ext_resource type="PackedScene" uid="uid://hpq3efjhjg7v" path="res://states/pick_obj_choose_state/pick_obj_choose_state.tscn" id="5_563o4"]
+[ext_resource type="PackedScene" uid="uid://dxhidpo0nutp2" path="res://states/show_inventory_state/show_inventory_state.tscn" id="7_hbgq7"]
 [ext_resource type="PackedScene" uid="uid://dxryuyhn3xrmu" path="res://components/z_layer_component/z_layer_component.tscn" id="8_s0on6"]
+[ext_resource type="PackedScene" uid="uid://dav56565o176c" path="res://states/show_detail_state/show_detail_state.tscn" id="8_uy2h0"]
 [ext_resource type="PackedScene" uid="uid://bf1aktrr4854g" path="res://objects/sword/sword.tscn" id="10_3l1wq"]
 [ext_resource type="PackedScene" uid="uid://ckwtp8uhqgpu1" path="res://objects/backpack/backpack.tscn" id="10_a758s"]
 
@@ -28,6 +30,10 @@ unique_name_in_owner = true
 [node name="PickPosChooseState" parent="States" instance=ExtResource("4_6k8r0")]
 
 [node name="PickObjChooseState" parent="States" instance=ExtResource("5_563o4")]
+
+[node name="ShowInventoryState" parent="States" instance=ExtResource("7_hbgq7")]
+
+[node name="ShowDetailState" parent="States" instance=ExtResource("8_uy2h0")]
 
 [node name="TileManager" parent="." instance=ExtResource("2_hknot")]
 unique_name_in_owner = true

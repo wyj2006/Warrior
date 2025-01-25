@@ -2,7 +2,7 @@ extends Node
 
 class_name PickObjChooseState
 
-@onready var origin = $/root/Game/%Player # 起点
+@onready var player = $/root/Game/%Player # 起点
 @onready var direction = Vector2(0, 0) # 方向
 @onready var game: Game = $/root/Game
 @onready var mapmanager: MapManager = $/root/Game/%MapManager
@@ -12,8 +12,6 @@ class_name PickObjChooseState
 func _process(_delta: float) -> void:
     if game.cur_state != self:
         disable_ui()
-    elif not PickAction.can_pick(origin):
-        $"%UnableTip".show()
     else:
         enable_ui()
 

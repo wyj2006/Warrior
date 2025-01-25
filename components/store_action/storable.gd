@@ -1,5 +1,7 @@
 extends Node
 
+class_name Storable
+
 
 var stored: bool:
     get:

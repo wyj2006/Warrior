@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://dr54fskhkn0m5"]
+[gd_scene load_steps=5 format=3 uid="uid://dr54fskhkn0m5"]
 
 [ext_resource type="Script" path="res://components/pick_action/pick_action.gd" id="1_atq82"]
+[ext_resource type="PackedScene" uid="uid://bubyiypl7f8gi" path="res://components/action_component/action_component.tscn" id="2_vngrv"]
+[ext_resource type="PackedScene" uid="uid://d1775i78g6ie7" path="res://components/name_attribute/name_attribute.tscn" id="3_kcha3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8oo0x"]
 size = Vector2(8, 12)
@@ -12,6 +14,11 @@ script = ExtResource("1_atq82")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_8oo0x")
+
+[node name="ActionComponent" parent="." instance=ExtResource("2_vngrv")]
+
+[node name="NameAttribute" parent="." instance=ExtResource("3_kcha3")]
+basic_name = "拾起"
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="area_exited" from="." to="." method="_on_area_exited"]

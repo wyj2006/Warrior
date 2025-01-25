@@ -3,52 +3,50 @@ extends CanvasLayer
 class_name PickObjChooseUi
 
 @onready var map_manager: MapManager = $/root/Game/%MapManager
-@onready var origin: Node2D = get_parent().origin
+@onready var player: Node2D = get_parent().player
 @onready var direction: Vector2 = get_parent().direction
 @onready var all_containers:
     get:
-        return origin.find_children("ContainerComponent") as Array[ContainerComponent]
+        return player.find_children("ContainerComponent") as Array[ContainerComponent]
 @onready var all_bodyparts:
     get:
-        return origin.find_children("BodypartComponent") as Array[BodypartComponent]
+        return player.find_children("BodypartComponent") as Array[BodypartComponent]
 
 var item_action = {}
-var pickable_nodes
+var pickable_objs
 var stored_nodes = [] # 已经被存起来的节点(还没有真的进行存储操作)
 var selected_items = {}
 
 func _ready() -> void:
-    var origin_pos: Vector3 = map_manager.get_tilemap_position(origin)
+    var origin_pos: Vector3 = map_manager.get_tilemap_position(player)
     var pos = origin_pos + Vector3(direction.x, direction.y, 0)
 
-    pickable_nodes = (origin.get_node("PickAction") as PickAction).pickable_objects
-    pickable_nodes = pickable_nodes.filter(func(x): return map_manager.get_tilemap_position(x) == pos)
+    pickable_objs = (player.get_node("PickAction") as PickAction).pickable_objects
+    pickable_objs = pickable_objs.filter(func(x): return map_manager.get_tilemap_position(x) == pos)
 
     var root = $"%PickableObjects".create_item()
+    var object_items = {}
 
-    for node in pickable_nodes:
-        if not PickAction.can_be_picked(node):
+    for action in player.get_children():
+        var action_component: ActionComponent = action.get_node_or_null("ActionComponent")
+        if action_component == null:
             continue
-        var object_item = $"%PickableObjects".create_item(root)
-        object_item.set_text(0, NameAttribute.get_self_name(node))
-        object_item.set_selectable(0, false)
-        
-        if StoreAction.can_store(origin) and StoreAction.can_be_stored(origin, node):
-            for container in all_containers:
+        for obj in pickable_objs:
+            if not action_component.can_be_done.call(obj):
+                continue
+            var object_item
+            if obj not in object_items:
+                object_item = $"%PickableObjects".create_item(root)
+                object_item.set_text(0, NameAttribute.get_self_name(obj))
+                object_item.set_selectable(0, false)
+                object_items[obj] = object_item
+            object_item = object_items[obj]
+            
+            var availabel_action = action_component.get_available_action.call(obj)
+            for action_name in availabel_action:
                 var action_item = $"%PickableObjects".create_item(object_item)
-                action_item.set_text(0, "存入 " + NameAttribute.get_self_name(container.get_parent()))
-                item_action[action_item] = func():
-                    var store_action: StoreAction = origin.get_node("StoreAction")
-                    store_action.store(node, container.get_parent())
-        if WearAction.can_wear(origin) and WearAction.can_be_wore(origin, node):
-            for bodypart in all_bodyparts:
-                if not bodypart.is_valid(node):
-                    continue
-                var action_item = $"%PickableObjects".create_item(object_item)
-                action_item.set_text(0, "穿在 " + NameAttribute.get_self_name(bodypart.get_parent()) + " 上")
-                item_action[action_item] = func():
-                    var wear_action: WearAction = origin.get_node("WearAction")
-                    wear_action.wear(node, bodypart.get_parent())
+                action_item.set_text(0, action_name)
+                item_action[action_item] = availabel_action[action_name]
 
 func _process(_delta: float) -> void:
     update_item_states()

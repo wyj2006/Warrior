@@ -11,3 +11,7 @@ extends Node
 var weight: float:
     get:
         return $AttributeComponent.value
+
+func _ready() -> void:
+    if $AttributeComponent.basic_value == null:
+        $AttributeComponent.basic_value = basic_weight

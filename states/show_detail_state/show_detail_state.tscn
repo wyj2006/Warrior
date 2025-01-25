@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dav56565o176c"]
+
+[ext_resource type="Script" path="res://states/show_detail_state/show_detail_state.gd" id="1_nmg3p"]
+
+[node name="ShowDetailState" type="Node"]
+script = ExtResource("1_nmg3p")

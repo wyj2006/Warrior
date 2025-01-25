@@ -7,3 +7,5 @@
 script = ExtResource("1_3dv0v")
 
 [node name="AttributeComponent" parent="." instance=ExtResource("2_haj33")]
+id = "name"
+attr_name = "名称"

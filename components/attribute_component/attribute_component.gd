@@ -56,3 +56,14 @@ static func get_all_attributes(node: Node) -> Array[AttributeComponent]:
         if attribute_component != null:
             nodes.append(attribute_component)
     return nodes
+
+func _ready() -> void:
+    $DetailComponent.get_control = func():
+        var ui = preload("res://components/attribute_component/attribute_detail.tscn").instantiate()
+        ui.attribute = self
+        return ui
+    var detail_component = $"..".get_node_or_null("DetailComponent")
+    if detail_component == null:
+        detail_component = $DetailComponent
+        remove_child.call_deferred(detail_component)
+        $"..".add_child.call_deferred(detail_component)

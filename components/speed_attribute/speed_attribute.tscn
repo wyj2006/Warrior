@@ -1,10 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://c18a53ikwaqwk"]
+[gd_scene load_steps=4 format=3 uid="uid://c18a53ikwaqwk"]
 
 [ext_resource type="Script" path="res://components/speed_attribute/speed_attribute.gd" id="1_76vgr"]
 [ext_resource type="PackedScene" uid="uid://dek0v7cuu66er" path="res://components/attribute_component/attribute_component.tscn" id="1_f6wxq"]
+[ext_resource type="PackedScene" uid="uid://d1775i78g6ie7" path="res://components/name_attribute/name_attribute.tscn" id="3_s0s0d"]
 
 [node name="SpeedAttribute" type="Node"]
 script = ExtResource("1_76vgr")
 
 [node name="AttributeComponent" parent="." instance=ExtResource("1_f6wxq")]
 id = "speed"
+
+[node name="NameAttribute" parent="." instance=ExtResource("3_s0s0d")]
+basic_name = "速度"

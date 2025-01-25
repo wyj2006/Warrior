@@ -1,0 +1,37 @@
+[gd_scene load_steps=2 format=3 uid="uid://bbtmfso044hmi"]
+
+[ext_resource type="Script" path="res://components/attribute_component/attribute_detail.gd" id="1_4frsu"]
+
+[node name="AttributeDetail" type="VBoxContainer"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 24.0
+grow_horizontal = 2
+script = ExtResource("1_4frsu")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Name" type="Label" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Value" type="Label" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ShowContributor" type="Button" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+toggle_mode = true
+text = "贡献者"
+
+[node name="Contributors" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[connection signal="toggled" from="HBoxContainer/ShowContributor" to="." method="_on_show_contributor_toggled"]

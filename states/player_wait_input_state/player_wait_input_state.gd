@@ -24,6 +24,8 @@ func _input(_event: InputEvent) -> void:
     elif Input.is_action_pressed("move_downleft"):
         direction = Vector2(-1, 1)
     elif Input.is_action_pressed("pick"):
-        game.cur_state = $%States/PickPosChooseState
+        game.cur_state = $/root/Game/%States/PickPosChooseState
+    elif Input.is_action_pressed("show_inventory"):
+        game.cur_state = $/root/Game/%States/ShowInventoryState
     if direction:
         $/root/Game/%Player/MoveAction.move(direction)

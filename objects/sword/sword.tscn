@@ -32,11 +32,13 @@ id = "sword"
 
 [node name="WeightAttribute" parent="." instance=ExtResource("8_mavb1")]
 
-[node name="ContributedFromBlade" parent="WeightAttribute" node_paths=PackedStringArray("attribute") instance=ExtResource("9_5uovb")]
+[node name="ContributedFromBlade" parent="WeightAttribute" node_paths=PackedStringArray("attribute", "source") instance=ExtResource("9_5uovb")]
 attribute = NodePath("../../Blade/WeightAttribute")
+source = NodePath("../../Blade")
 
-[node name="ContributedFromHilt" parent="WeightAttribute" node_paths=PackedStringArray("attribute") instance=ExtResource("9_5uovb")]
+[node name="ContributedFromHilt" parent="WeightAttribute" node_paths=PackedStringArray("attribute", "source") instance=ExtResource("9_5uovb")]
 attribute = NodePath("../../Hilt/WeightAttribute")
+source = NodePath("../../Hilt")
 
 [node name="Blade" type="Node" parent="."]
 
@@ -45,9 +47,15 @@ attribute = NodePath("../../Hilt/WeightAttribute")
 [node name="WeightAttribute" parent="Blade" instance=ExtResource("8_mavb1")]
 basic_weight = 1.0
 
+[node name="NameAttribute" parent="Blade" instance=ExtResource("3_q0fxr")]
+basic_name = "剑身"
+
 [node name="Hilt" type="Node" parent="."]
 
 [node name="IronMaterial" parent="Hilt" instance=ExtResource("8_1c5oj")]
 
 [node name="WeightAttribute" parent="Hilt" instance=ExtResource("8_mavb1")]
 basic_weight = 0.5
+
+[node name="NameAttribute" parent="Hilt" instance=ExtResource("3_q0fxr")]
+basic_name = "剑柄"
