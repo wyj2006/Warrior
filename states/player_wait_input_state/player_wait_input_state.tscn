@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://2ikf7jqv3dm8"]
-
-[ext_resource type="Script" path="res://states/player_wait_input_state/player_wait_input_state.gd" id="1_hw63t"]
-
-[node name="PlayerWaitInputState" type="Node"]
-script = ExtResource("1_hw63t")

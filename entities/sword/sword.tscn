@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://kjfco8eto5pb"]
+
+[ext_resource type="Script" uid="uid://7mxrgnjoled3" path="res://components/tile.gd" id="1_adtaq"]
+[ext_resource type="Script" uid="uid://bxlka5idmrgdb" path="res://entities/sword/sword.gd" id="1_dcab7"]
+
+[node name="Sword" type="Sword2D"]
+kind = "sword"
+script = ExtResource("1_dcab7")
+
+[node name="Tile" type="Sprite2D" parent="."]
+script = ExtResource("1_adtaq")
+id = "sword"
+metadata/_custom_type_script = "uid://7mxrgnjoled3"

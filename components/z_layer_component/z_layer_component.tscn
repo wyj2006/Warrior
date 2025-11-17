@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dxryuyhn3xrmu"]
-
-[ext_resource type="Script" path="res://components/z_layer_component/z_layer_component.gd" id="1_hkraw"]
-
-[node name="ZLayerComponent" type="Node"]
-script = ExtResource("1_hkraw")

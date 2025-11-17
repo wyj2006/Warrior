@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://ia1s0m4hg1sr"]
-
-[ext_resource type="Script" path="res://states/init_state/init_state.gd" id="1_o2wvm"]
-
-[node name="InitState" type="Node"]
-script = ExtResource("1_o2wvm")

@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://b717xk1stnj86"]
-
-[ext_resource type="Script" path="res://components/wear_action/wearable.gd" id="1_rma2j"]
-
-[node name="Wearable" type="Node"]
-script = ExtResource("1_rma2j")

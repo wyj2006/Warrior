@@ -1,9 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://dek0v7cuu66er"]
-
-[ext_resource type="Script" path="res://components/attribute_component/attribute_component.gd" id="1_2ugjm"]
-[ext_resource type="PackedScene" uid="uid://d03ea742gr22c" path="res://components/detail_component/detail_component.tscn" id="2_t7t0m"]
-
-[node name="AttributeComponent" type="Node"]
-script = ExtResource("1_2ugjm")
-
-[node name="DetailComponent" parent="." instance=ExtResource("2_t7t0m")]

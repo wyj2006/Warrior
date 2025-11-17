@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://chvpwxtd3f1ha"]
+
+[ext_resource type="Script" uid="uid://7mxrgnjoled3" path="res://components/tile.gd" id="1_301k8"]
+[ext_resource type="Script" uid="uid://txg7tac2oern" path="res://entities/wall/wall.gd" id="1_afsjk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_afsjk"]
+resource_local_to_scene = true
+
+[node name="Wall" type="Wall2D"]
+script = ExtResource("1_afsjk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_afsjk")
+
+[node name="Tile" type="Sprite2D" parent="."]
+script = ExtResource("1_301k8")
+id = "wall"
+metadata/_custom_type_script = "uid://7mxrgnjoled3"

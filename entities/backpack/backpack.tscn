@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://rouy2xojqu2"]
+
+[node name="Backpack" type="Backpack2D"]

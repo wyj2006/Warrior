@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://pkhno6443mt4"]
+
+[ext_resource type="Script" uid="uid://c0o1h0unfg0kx" path="res://scenes/world.gd" id="1_k0juu"]
+[ext_resource type="PackedScene" uid="uid://cielwn4qkylxq" path="res://entities/player/player.tscn" id="1_nnsk1"]
+[ext_resource type="Script" uid="uid://cyf6tolxixvoy" path="res://managers/tile_manager.gd" id="1_rwgxs"]
+[ext_resource type="PackedScene" uid="uid://kjfco8eto5pb" path="res://entities/sword/sword.tscn" id="4_k0juu"]
+
+[node name="World" type="Node2D"]
+script = ExtResource("1_k0juu")
+
+[node name="TileManager" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("1_rwgxs")
+metadata/_custom_type_script = "uid://cyf6tolxixvoy"
+
+[node name="Sword" parent="." instance=ExtResource("4_k0juu")]
+
+[node name="Player" parent="." instance=ExtResource("1_nnsk1")]
+basic_speed = 100.0
+
+[node name="Backpack" type="Backpack2D" parent="Player"]

@@ -1,5 +1,9 @@
 # Godot 4+ specific ignores
 .godot/
 /android/
-.vscode/
-gdformatrc
+
+# Added by cargo
+/target
+
+.vscode
+**/*.tmp

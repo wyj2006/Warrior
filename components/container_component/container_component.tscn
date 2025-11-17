@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://cxl07qxtcsprt"]
-
-[ext_resource type="Script" path="res://components/container_component/container_component.gd" id="1_wr1a5"]
-
-[node name="ContainerComponent" type="Node"]
-script = ExtResource("1_wr1a5")
