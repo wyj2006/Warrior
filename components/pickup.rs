@@ -1,4 +1,5 @@
 use crate::GameState;
+use crate::NodeEntityMap;
 use crate::components::*;
 use bevy::prelude::*;
 use godot::prelude::*;
@@ -6,7 +7,6 @@ use godot_bevy::prelude::*;
 
 #[derive(Component, Default, Debug)]
 pub struct PickUp {
-    pub disabled: bool,
     pub can_pick: bool,      //是否可以拾取
     pub can_be_picked: bool, //是否可以被拾取
     pub detector: Option<InstanceId>,
@@ -36,12 +36,12 @@ pub struct PickUpUi {
 
 #[derive(Event, Debug)]
 pub struct PickUpEvent {
-    pub container_id: i64, //拥有Container组件的node id
-    pub object_id: i64,    //拥有PickUp组件的node id
+    pub container: Entity,
+    pub object: Entity,
 }
 
 #[main_thread_system]
-pub fn install_pick_detector(query: Query<(&mut GodotNodeHandle, &mut PickUp)>) {
+pub fn install_pick_detector(query: Query<(&mut GodotNodeHandle, &mut PickUp), Added<PickUp>>) {
     for (mut handle, mut pick_up) in query {
         if !pick_up.can_pick && !pick_up.can_be_picked {
             continue;
@@ -75,7 +75,7 @@ pub fn spawn_pick_up_ui(
     )>,
 ) {
     for (mut player_handle, player_pickup) in players {
-        if !player_pickup.can_pick || player_pickup.disabled {
+        if !player_pickup.can_pick {
             continue;
         }
         let Some(mut player) = player_handle.try_get::<Node>() else {
@@ -97,7 +97,7 @@ pub fn spawn_pick_up_ui(
             let mut pick_up_ui = pick_up_ui.bind_mut();
 
             for (mut object_handle, object_pickup, display_name) in query.p0().iter_mut() {
-                if !object_pickup.can_be_picked || object_pickup.disabled {
+                if !object_pickup.can_be_picked {
                     continue;
                 }
                 let Some(object) = object_handle.try_get::<Node>() else {
@@ -158,6 +158,7 @@ pub fn unspawn_pick_up_ui(query: Query<&mut GodotNodeHandle, With<CanvasLayerMar
 ///将用户选择要拾取的东西提交到event中
 #[main_thread_system]
 pub fn submit_user_pick_up(
+    node_entity_map: Res<NodeEntityMap>,
     mut next: ResMut<NextState<GameState>>,
     mut pick_up_events: EventWriter<PickUpEvent>,
     query: Query<&mut GodotNodeHandle, With<CanvasLayerMarker>>,
@@ -178,8 +179,8 @@ pub fn submit_user_pick_up(
                     continue;
                 };
                 pick_up_events.write(PickUpEvent {
-                    container_id: container_id,
-                    object_id: object_id,
+                    container: node_entity_map.0[&container_id],
+                    object: node_entity_map.0[&object_id],
                 });
             }
         }
@@ -188,18 +189,25 @@ pub fn submit_user_pick_up(
 }
 
 #[main_thread_system]
-pub fn pick_up(mut pick_up_events: EventReader<PickUpEvent>) {
+pub fn pick_up(
+    node_entity_map: Res<NodeEntityMap>,
+    mut pick_up_events: EventReader<PickUpEvent>,
+    mut query: Query<&mut PickUp>,
+) {
     for event in pick_up_events.read() {
-        let container_id = &event.container_id;
-        let object_id = &event.object_id;
-        let Ok(container) = Gd::<Node>::try_from_instance_id(InstanceId::from_i64(*container_id))
-        else {
+        let Ok(container) = Gd::<Node>::try_from_instance_id(InstanceId::from_i64(
+            node_entity_map.1[&event.container],
+        )) else {
             continue;
         };
-        let Ok(mut object) = Gd::<Node>::try_from_instance_id(InstanceId::from_i64(*object_id))
-        else {
+        let Ok(mut object) = Gd::<Node>::try_from_instance_id(InstanceId::from_i64(
+            node_entity_map.1[&event.object],
+        )) else {
             continue;
         };
+        if let Ok(mut t) = query.get_mut(event.object) {
+            t.can_be_picked = false;
+        }
         object.reparent(&container);
     }
 }
