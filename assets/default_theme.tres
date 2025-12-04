@@ -1,0 +1,21 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://dfhvhd43jbsi1"]
+
+[ext_resource type="FontFile" uid="uid://088c3mn76edi" path="res://assets/minecraft.ttf" id="1_qew4h"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o54fn"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+
+[resource]
+default_font = ExtResource("1_qew4h")
+Button/styles/disabled = SubResource("StyleBoxFlat_o54fn")
+Button/styles/focus = SubResource("StyleBoxFlat_o54fn")
+Button/styles/hover = SubResource("StyleBoxFlat_o54fn")
+Button/styles/normal = SubResource("StyleBoxFlat_o54fn")
+Button/styles/pressed = SubResource("StyleBoxFlat_o54fn")
+Label/styles/focus = SubResource("StyleBoxFlat_o54fn")
+Label/styles/normal = SubResource("StyleBoxFlat_o54fn")

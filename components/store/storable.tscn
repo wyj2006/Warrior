@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dcthlb6beqsse"]
+
+[ext_resource type="Script" uid="uid://eeposn5vy50q" path="res://components/store/storable.gd" id="1_mngvp"]
+
+[node name="Storable" type="Node"]
+script = ExtResource("1_mngvp")

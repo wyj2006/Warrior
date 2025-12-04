@@ -1,18 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://chvpwxtd3f1ha"]
+[gd_scene load_steps=3 format=3 uid="uid://crso6ln3ot7y3"]
 
-[ext_resource type="Script" uid="uid://7mxrgnjoled3" path="res://components/tile.gd" id="1_301k8"]
-[ext_resource type="Script" uid="uid://txg7tac2oern" path="res://entities/wall/wall.gd" id="1_afsjk"]
+[ext_resource type="PackedScene" uid="uid://cbmbcg1llft7u" path="res://components/tiletexture/tile_texture.tscn" id="1_ndby4"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_afsjk"]
-resource_local_to_scene = true
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ndby4"]
 
-[node name="Wall" type="Wall2D"]
-script = ExtResource("1_afsjk")
+[node name="Wall" type="StaticBody2D"]
+
+[node name="TileTexture" parent="." node_paths=PackedStringArray("size_related") instance=ExtResource("1_ndby4")]
+tile_id = "wall"
+size_related = [NodePath("../CollisionShape2D")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_afsjk")
-
-[node name="Tile" type="Sprite2D" parent="."]
-script = ExtResource("1_301k8")
-id = "wall"
-metadata/_custom_type_script = "uid://7mxrgnjoled3"
+shape = SubResource("RectangleShape2D_ndby4")

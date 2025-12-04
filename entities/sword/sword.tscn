@@ -1,13 +1,24 @@
-[gd_scene load_steps=3 format=3 uid="uid://kjfco8eto5pb"]
+[gd_scene load_steps=6 format=3 uid="uid://dkeb1f807qlvm"]
 
-[ext_resource type="Script" uid="uid://7mxrgnjoled3" path="res://components/tile.gd" id="1_adtaq"]
-[ext_resource type="Script" uid="uid://bxlka5idmrgdb" path="res://entities/sword/sword.gd" id="1_dcab7"]
+[ext_resource type="PackedScene" uid="uid://cbmbcg1llft7u" path="res://components/tiletexture/tile_texture.tscn" id="1_x2rbu"]
+[ext_resource type="PackedScene" uid="uid://bxmyw0m0qh5ve" path="res://components/pick/pickable.tscn" id="2_ns4di"]
+[ext_resource type="PackedScene" uid="uid://c4ut21tdsms8a" path="res://components/displayname/display_name.tscn" id="3_50in7"]
+[ext_resource type="PackedScene" uid="uid://dcthlb6beqsse" path="res://components/store/storable.tscn" id="4_ha8u6"]
 
-[node name="Sword" type="Sword2D"]
-kind = "sword"
-script = ExtResource("1_dcab7")
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_50in7"]
 
-[node name="Tile" type="Sprite2D" parent="."]
-script = ExtResource("1_adtaq")
-id = "sword"
-metadata/_custom_type_script = "uid://7mxrgnjoled3"
+[node name="Sword" type="Node2D"]
+
+[node name="TileTexture" parent="." node_paths=PackedStringArray("size_related") instance=ExtResource("1_x2rbu")]
+tile_id = "sword"
+size_related = [NodePath("../Pickable/CollisionShape2D")]
+
+[node name="Pickable" parent="." instance=ExtResource("2_ns4di")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pickable"]
+shape = SubResource("RectangleShape2D_50in7")
+
+[node name="DisplayName" parent="." instance=ExtResource("3_50in7")]
+base_name = "剑"
+
+[node name="Storable" parent="." instance=ExtResource("4_ha8u6")]

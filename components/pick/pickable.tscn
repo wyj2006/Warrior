@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bxmyw0m0qh5ve"]
+
+[ext_resource type="Script" uid="uid://b3b2knme5lmcw" path="res://components/pick/pickable.gd" id="1_l03fw"]
+
+[node name="Pickable" type="Area2D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_l03fw")

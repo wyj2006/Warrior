@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://b5dkgux6v3bwh"]
+
+[ext_resource type="Script" uid="uid://bpmqx5tvdl3bh" path="res://components/container/container.gd" id="1_xf4ox"]
+
+[node name="Container" type="Node2D"]
+script = ExtResource("1_xf4ox")
+
+[connection signal="child_entered_tree" from="." to="." method="_on_child_entered_tree"]

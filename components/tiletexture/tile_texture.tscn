@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cbmbcg1llft7u"]
+
+[ext_resource type="Script" uid="uid://cadm3mecq6wrf" path="res://components/tiletexture/tile_texture.gd" id="1_3ugn0"]
+
+[node name="TileTexture" type="Sprite2D"]
+script = ExtResource("1_3ugn0")

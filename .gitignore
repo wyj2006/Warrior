@@ -2,8 +2,4 @@
 .godot/
 /android/
 
-# Added by cargo
-/target
-
 .vscode
-**/*.tmp

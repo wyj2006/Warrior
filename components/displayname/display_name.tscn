@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c4ut21tdsms8a"]
+
+[ext_resource type="Script" uid="uid://imdomhkkbbqe" path="res://components/displayname/display_name.gd" id="1_qygls"]
+
+[node name="DisplayName" type="Node"]
+script = ExtResource("1_qygls")
