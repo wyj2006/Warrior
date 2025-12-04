@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bpmqx5tvdl3bh" path="res://components/container/container.gd" id="1_xf4ox"]
 
-[node name="Container" type="Node2D"]
+[node name="Container" type="Node3D"]
 script = ExtResource("1_xf4ox")
 
 [connection signal="child_entered_tree" from="." to="." method="_on_child_entered_tree"]

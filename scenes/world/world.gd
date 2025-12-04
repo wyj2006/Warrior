@@ -1,4 +1,4 @@
-extends Node2D
+extends Node3D
 
 func _ready() -> void:
 	$%HSM.add_transition($%PlayerAction, $%PlayerPick, "to_player_pick")

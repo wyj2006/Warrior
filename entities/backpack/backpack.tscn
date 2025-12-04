@@ -6,20 +6,20 @@
 [ext_resource type="PackedScene" uid="uid://c4ut21tdsms8a" path="res://components/displayname/display_name.tscn" id="4_adr4u"]
 [ext_resource type="PackedScene" uid="uid://dcthlb6beqsse" path="res://components/store/storable.tscn" id="5_j3e2m"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_adr4u"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_j3e2m"]
 
-[node name="Backpack" type="Node2D"]
+[node name="Backpack" type="Node3D"]
 
 [node name="TileTexture" parent="." node_paths=PackedStringArray("size_related") instance=ExtResource("1_gkv83")]
 tile_id = "backpack"
-size_related = [NodePath("../Pickable/CollisionShape2D")]
+size_related = [null, NodePath("../Pickable/CollisionShape3D")]
 
 [node name="Container" parent="." instance=ExtResource("2_nfij8")]
 
 [node name="Pickable" parent="." instance=ExtResource("3_pcwpe")]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Pickable"]
-shape = SubResource("RectangleShape2D_adr4u")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Pickable"]
+shape = SubResource("BoxShape3D_j3e2m")
 
 [node name="DisplayName" parent="." instance=ExtResource("4_adr4u")]
 base_name = "背包"

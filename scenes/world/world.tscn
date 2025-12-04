@@ -1,15 +1,16 @@
-[gd_scene load_steps=9 format=3 uid="uid://vs3ribkc2ovk"]
+[gd_scene load_steps=10 format=3 uid="uid://vs3ribkc2ovk"]
 
 [ext_resource type="Script" uid="uid://biru6iidh3t0l" path="res://scenes/world/world.gd" id="1_6m72w"]
 [ext_resource type="PackedScene" uid="uid://bubq46ltxd7hs" path="res://managers/tilemanager/tile_manager.tscn" id="1_dphjl"]
 [ext_resource type="PackedScene" uid="uid://bwnbpr45khn8q" path="res://entities/player/player.tscn" id="2_sl2e5"]
 [ext_resource type="PackedScene" uid="uid://crso6ln3ot7y3" path="res://entities/wall/wall.tscn" id="3_1fp7r"]
+[ext_resource type="Script" uid="uid://dvmpfoe82xmqk" path="res://scenes/world/camera_3d.gd" id="5_1yooq"]
 [ext_resource type="PackedScene" uid="uid://dkeb1f807qlvm" path="res://entities/sword/sword.tscn" id="5_v5dby"]
 [ext_resource type="PackedScene" uid="uid://rouy2xojqu2" path="res://entities/backpack/backpack.tscn" id="6_t5ptc"]
 [ext_resource type="Script" uid="uid://bjba4bcxv2qwj" path="res://scenes/world/states/player_action.gd" id="7_bq33v"]
 [ext_resource type="Script" uid="uid://dxy2b4lf2srr1" path="res://scenes/world/states/player_pick.gd" id="8_j2gmx"]
 
-[node name="World" type="Node2D"]
+[node name="World" type="Node3D"]
 script = ExtResource("1_6m72w")
 
 [node name="TileManager" parent="." instance=ExtResource("1_dphjl")]
@@ -19,12 +20,18 @@ unique_name_in_owner = true
 unique_name_in_owner = true
 
 [node name="Backpack" parent="Player" instance=ExtResource("6_t5ptc")]
+visible = false
+
+[node name="Camera3D" type="Camera3D" parent="Player"]
+script = ExtResource("5_1yooq")
 
 [node name="Wall" parent="." instance=ExtResource("3_1fp7r")]
-position = Vector2(84, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 0)
 
 [node name="Sword" parent="." instance=ExtResource("5_v5dby")]
-position = Vector2(200, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 
 [node name="HSM" type="LimboHSM" parent="."]
 unique_name_in_owner = true

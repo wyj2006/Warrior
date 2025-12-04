@@ -5,18 +5,18 @@
 [ext_resource type="PackedScene" uid="uid://c4ut21tdsms8a" path="res://components/displayname/display_name.tscn" id="3_50in7"]
 [ext_resource type="PackedScene" uid="uid://dcthlb6beqsse" path="res://components/store/storable.tscn" id="4_ha8u6"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_50in7"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_ha8u6"]
 
-[node name="Sword" type="Node2D"]
+[node name="Sword" type="Node3D"]
 
 [node name="TileTexture" parent="." node_paths=PackedStringArray("size_related") instance=ExtResource("1_x2rbu")]
 tile_id = "sword"
-size_related = [NodePath("../Pickable/CollisionShape2D")]
+size_related = [NodePath("../Pickable/CollisionShape3D")]
 
 [node name="Pickable" parent="." instance=ExtResource("2_ns4di")]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Pickable"]
-shape = SubResource("RectangleShape2D_50in7")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Pickable"]
+shape = SubResource("BoxShape3D_ha8u6")
 
 [node name="DisplayName" parent="." instance=ExtResource("3_50in7")]
 base_name = "剑"

@@ -1,6 +1,6 @@
-class_name Pickable extends Area2D
+class_name Pickable extends Area3D
 
-## CollisionShape2D 或 CollisionPolygon2D
+## CollisionShape3D 或 CollisionPolygon3D
 @export var collision: Node2D = null
 
 var picked:

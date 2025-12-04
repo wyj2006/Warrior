@@ -2,13 +2,13 @@
 
 [ext_resource type="PackedScene" uid="uid://cbmbcg1llft7u" path="res://components/tiletexture/tile_texture.tscn" id="1_ndby4"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ndby4"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_ndby4"]
 
-[node name="Wall" type="StaticBody2D"]
+[node name="Wall" type="StaticBody3D"]
 
 [node name="TileTexture" parent="." node_paths=PackedStringArray("size_related") instance=ExtResource("1_ndby4")]
 tile_id = "wall"
-size_related = [NodePath("../CollisionShape2D")]
+size_related = [NodePath("../CollisionShape3D")]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_ndby4")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_ndby4")

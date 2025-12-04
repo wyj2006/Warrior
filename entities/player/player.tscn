@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bwnbpr45khn8q"]
+[gd_scene load_steps=8 format=3 uid="uid://bwnbpr45khn8q"]
 
 [ext_resource type="Script" uid="uid://dbbdmntxyvd0s" path="res://entities/player/player.gd" id="1_bls4j"]
 [ext_resource type="PackedScene" uid="uid://cbmbcg1llft7u" path="res://components/tiletexture/tile_texture.tscn" id="1_symyc"]
@@ -6,21 +6,20 @@
 [ext_resource type="PackedScene" uid="uid://dgwryv66t0acm" path="res://components/pick/pick.tscn" id="5_fkugw"]
 [ext_resource type="PackedScene" uid="uid://d352g5gg2hoa0" path="res://components/store/store.tscn" id="6_8fjmc"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_symyc"]
+[sub_resource type="PlaneMesh" id="PlaneMesh_8fjmc"]
+resource_local_to_scene = true
+orientation = 2
 
-[node name="Player" type="CharacterBody2D"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_fkugw"]
+
+[node name="Player" type="CharacterBody3D"]
 motion_mode = 1
 script = ExtResource("1_bls4j")
 
 [node name="TileTexture" parent="." node_paths=PackedStringArray("size_related") instance=ExtResource("1_symyc")]
+mesh = SubResource("PlaneMesh_8fjmc")
 tile_id = "player"
-size_related = [NodePath("../CollisionShape2D")]
-
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(2, 2)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_symyc")
+size_related = [NodePath("../CollisionShape3D")]
 
 [node name="Speed" parent="." instance=ExtResource("4_fkugw")]
 base_speed = 10.0
@@ -28,3 +27,6 @@ base_speed = 10.0
 [node name="Pick" parent="." instance=ExtResource("5_fkugw")]
 
 [node name="Store" parent="." instance=ExtResource("6_8fjmc")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_fkugw")

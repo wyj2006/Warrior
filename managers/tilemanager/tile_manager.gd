@@ -1,6 +1,7 @@
 class_name TileManager extends Node
 
 @export var tile_set: TileSet
+@export var tile_height: float = 200
 @onready var source: TileSetAtlasSource = tile_set.get_source(0)
 
 @onready var player: Texture2D = get_and_tint(Vector2i(0, 4))
