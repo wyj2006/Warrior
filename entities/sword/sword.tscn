@@ -1,15 +1,21 @@
-[gd_scene load_steps=6 format=3 uid="uid://dkeb1f807qlvm"]
+[gd_scene load_steps=8 format=3 uid="uid://dkeb1f807qlvm"]
 
 [ext_resource type="PackedScene" uid="uid://cbmbcg1llft7u" path="res://components/tiletexture/tile_texture.tscn" id="1_x2rbu"]
 [ext_resource type="PackedScene" uid="uid://bxmyw0m0qh5ve" path="res://components/pick/pickable.tscn" id="2_ns4di"]
 [ext_resource type="PackedScene" uid="uid://c4ut21tdsms8a" path="res://components/displayname/display_name.tscn" id="3_50in7"]
 [ext_resource type="PackedScene" uid="uid://dcthlb6beqsse" path="res://components/store/storable.tscn" id="4_ha8u6"]
+[ext_resource type="PackedScene" uid="uid://j5iyakeon8sw" path="res://components/throw/throwable.tscn" id="5_51xnw"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_h5nll"]
+resource_local_to_scene = true
+orientation = 2
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ha8u6"]
 
 [node name="Sword" type="Node3D"]
 
 [node name="TileTexture" parent="." node_paths=PackedStringArray("size_related") instance=ExtResource("1_x2rbu")]
+mesh = SubResource("PlaneMesh_h5nll")
 tile_id = "sword"
 size_related = [NodePath("../Pickable/CollisionShape3D")]
 
@@ -22,3 +28,5 @@ shape = SubResource("BoxShape3D_ha8u6")
 base_name = "剑"
 
 [node name="Storable" parent="." instance=ExtResource("4_ha8u6")]
+
+[node name="Throwable" parent="." instance=ExtResource("5_51xnw")]

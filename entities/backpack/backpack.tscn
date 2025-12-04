@@ -1,16 +1,22 @@
-[gd_scene load_steps=7 format=3 uid="uid://rouy2xojqu2"]
+[gd_scene load_steps=9 format=3 uid="uid://rouy2xojqu2"]
 
 [ext_resource type="PackedScene" uid="uid://cbmbcg1llft7u" path="res://components/tiletexture/tile_texture.tscn" id="1_gkv83"]
 [ext_resource type="PackedScene" uid="uid://b5dkgux6v3bwh" path="res://components/container/container.tscn" id="2_nfij8"]
 [ext_resource type="PackedScene" uid="uid://bxmyw0m0qh5ve" path="res://components/pick/pickable.tscn" id="3_pcwpe"]
 [ext_resource type="PackedScene" uid="uid://c4ut21tdsms8a" path="res://components/displayname/display_name.tscn" id="4_adr4u"]
 [ext_resource type="PackedScene" uid="uid://dcthlb6beqsse" path="res://components/store/storable.tscn" id="5_j3e2m"]
+[ext_resource type="PackedScene" uid="uid://j5iyakeon8sw" path="res://components/throw/throwable.tscn" id="6_01vq0"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_a7wx7"]
+resource_local_to_scene = true
+orientation = 2
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_j3e2m"]
 
 [node name="Backpack" type="Node3D"]
 
 [node name="TileTexture" parent="." node_paths=PackedStringArray("size_related") instance=ExtResource("1_gkv83")]
+mesh = SubResource("PlaneMesh_a7wx7")
 tile_id = "backpack"
 size_related = [null, NodePath("../Pickable/CollisionShape3D")]
 
@@ -25,3 +31,5 @@ shape = SubResource("BoxShape3D_j3e2m")
 base_name = "背包"
 
 [node name="Storable" parent="." instance=ExtResource("5_j3e2m")]
+
+[node name="Throwable" parent="." instance=ExtResource("6_01vq0")]

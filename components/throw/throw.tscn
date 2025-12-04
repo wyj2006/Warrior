@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bbdvrmqvmotfi"]
+
+[ext_resource type="Script" uid="uid://bbqk0arby41rl" path="res://components/throw/throw.gd" id="1_ejqm7"]
+
+[node name="Throw" type="Node"]
+script = ExtResource("1_ejqm7")

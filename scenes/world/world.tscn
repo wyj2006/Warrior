@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://vs3ribkc2ovk"]
+[gd_scene load_steps=21 format=3 uid="uid://vs3ribkc2ovk"]
 
 [ext_resource type="Script" uid="uid://biru6iidh3t0l" path="res://scenes/world/world.gd" id="1_6m72w"]
 [ext_resource type="PackedScene" uid="uid://bubq46ltxd7hs" path="res://managers/tilemanager/tile_manager.tscn" id="1_dphjl"]
@@ -7,8 +7,20 @@
 [ext_resource type="Script" uid="uid://dvmpfoe82xmqk" path="res://scenes/world/camera_3d.gd" id="5_1yooq"]
 [ext_resource type="PackedScene" uid="uid://dkeb1f807qlvm" path="res://entities/sword/sword.tscn" id="5_v5dby"]
 [ext_resource type="PackedScene" uid="uid://rouy2xojqu2" path="res://entities/backpack/backpack.tscn" id="6_t5ptc"]
-[ext_resource type="Script" uid="uid://bjba4bcxv2qwj" path="res://scenes/world/states/player_action.gd" id="7_bq33v"]
-[ext_resource type="Script" uid="uid://dxy2b4lf2srr1" path="res://scenes/world/states/player_pick.gd" id="8_j2gmx"]
+[ext_resource type="Script" uid="uid://bjba4bcxv2qwj" path="res://states/player_action.gd" id="7_bq33v"]
+[ext_resource type="Script" uid="uid://dxy2b4lf2srr1" path="res://states/playerpick/player_pick.gd" id="8_j2gmx"]
+[ext_resource type="Script" uid="uid://nnjqc4fyu32d" path="res://states/playerthrow/player_throw.gd" id="10_gb53w"]
+[ext_resource type="Script" uid="uid://4c06x21f0obd" path="res://states/playerpick/start.gd" id="10_mxkvs"]
+[ext_resource type="Script" uid="uid://d1lmv65cxdfrb" path="res://states/playerthrow/start.gd" id="11_5qq27"]
+[ext_resource type="Script" uid="uid://b2otwyi5eu6yr" path="res://states/playerpick/none.gd" id="11_71ii3"]
+[ext_resource type="Script" uid="uid://wuaf2vp1qmgr" path="res://states/playerpick/some.gd" id="11_bt7bg"]
+[ext_resource type="Script" uid="uid://brullywn6eexk" path="res://states/playerpick/error.gd" id="11_m114p"]
+[ext_resource type="Script" uid="uid://3vnefm2uohl4" path="res://states/playerthrow/some.gd" id="12_dlabj"]
+[ext_resource type="Script" uid="uid://dx7v7kc7wgae3" path="res://states/playerthrow/none.gd" id="13_srmg5"]
+[ext_resource type="Script" uid="uid://cdx4andbuthuh" path="res://states/playerpick/one.gd" id="13_wbwoo"]
+[ext_resource type="Script" uid="uid://ct346kbx6e1ux" path="res://states/playerthrow/error.gd" id="14_umvgx"]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_bt7bg"]
 
 [node name="World" type="Node3D"]
 script = ExtResource("1_6m72w")
@@ -20,7 +32,6 @@ unique_name_in_owner = true
 unique_name_in_owner = true
 
 [node name="Backpack" parent="Player" instance=ExtResource("6_t5ptc")]
-visible = false
 
 [node name="Camera3D" type="Camera3D" parent="Player"]
 script = ExtResource("5_1yooq")
@@ -40,14 +51,19 @@ unique_name_in_owner = true
 unique_name_in_owner = true
 script = ExtResource("7_bq33v")
 
-[node name="PlayerPick" type="LimboState" parent="HSM"]
+[node name="PlayerPick" type="LimboHSM" parent="HSM"]
 unique_name_in_owner = true
 script = ExtResource("8_j2gmx")
 
-[node name="Some" type="CanvasLayer" parent="HSM/PlayerPick"]
-unique_name_in_owner = true
+[node name="Start" type="LimboState" parent="HSM/PlayerPick"]
+script = ExtResource("10_mxkvs")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HSM/PlayerPick/Some"]
+[node name="Some" type="LimboState" parent="HSM/PlayerPick"]
+script = ExtResource("11_bt7bg")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="HSM/PlayerPick/Some"]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HSM/PlayerPick/Some/CanvasLayer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -56,43 +72,47 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="HSM/PlayerPick/Some/VBoxContainer"]
+[node name="Label" type="Label" parent="HSM/PlayerPick/Some/CanvasLayer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-text = "可拾取的物品"
+text = "可拾取的东西"
 horizontal_alignment = 1
 
-[node name="ScrollContainer" type="ScrollContainer" parent="HSM/PlayerPick/Some/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="HSM/PlayerPick/Some/CanvasLayer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="ItemList" type="VBoxContainer" parent="HSM/PlayerPick/Some/VBoxContainer/ScrollContainer"]
-unique_name_in_owner = true
+[node name="ItemList" type="VBoxContainer" parent="HSM/PlayerPick/Some/CanvasLayer/VBoxContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 2
 
-[node name="None" type="CanvasLayer" parent="HSM/PlayerPick"]
-unique_name_in_owner = true
+[node name="None" type="LimboState" parent="HSM/PlayerPick"]
+script = ExtResource("11_71ii3")
 
-[node name="Label" type="Label" parent="HSM/PlayerPick/None"]
+[node name="CanvasLayer" type="CanvasLayer" parent="HSM/PlayerPick/None"]
+
+[node name="Label" type="Label" parent="HSM/PlayerPick/None/CanvasLayer"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
+offset_left = -65.0
 offset_top = -11.5
-offset_right = 20.0
+offset_right = 65.0
 offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
 text = "没有可拾取的东西"
 
-[node name="One" type="CanvasLayer" parent="HSM/PlayerPick"]
-unique_name_in_owner = true
+[node name="One" type="LimboState" parent="HSM/PlayerPick"]
+blackboard_plan = SubResource("BlackboardPlan_bt7bg")
+script = ExtResource("13_wbwoo")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HSM/PlayerPick/One"]
+[node name="CanvasLayer" type="CanvasLayer" parent="HSM/PlayerPick/One"]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HSM/PlayerPick/One/CanvasLayer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -101,20 +121,108 @@ grow_vertical = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
 
-[node name="Label" type="Label" parent="HSM/PlayerPick/One/VBoxContainer"]
+[node name="Label" type="Label" parent="HSM/PlayerPick/One/CanvasLayer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "想要对它做什么？"
 horizontal_alignment = 1
 
-[node name="ScrollContainer" type="ScrollContainer" parent="HSM/PlayerPick/One/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="HSM/PlayerPick/One/CanvasLayer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="ActionList" type="VBoxContainer" parent="HSM/PlayerPick/One/VBoxContainer/ScrollContainer"]
-unique_name_in_owner = true
+[node name="ActionList" type="VBoxContainer" parent="HSM/PlayerPick/One/CanvasLayer/VBoxContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 2
 
-[connection signal="visibility_changed" from="HSM/PlayerPick/Some" to="HSM/PlayerPick" method="_on_some_visibility_changed"]
+[node name="Error" type="LimboState" parent="HSM/PlayerPick"]
+script = ExtResource("11_m114p")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="HSM/PlayerPick/Error"]
+
+[node name="Label" type="Label" parent="HSM/PlayerPick/Error/CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -33.0
+offset_top = -11.5
+offset_right = 33.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "无法拾取"
+
+[node name="PlayerThrow" type="LimboHSM" parent="HSM"]
+unique_name_in_owner = true
+script = ExtResource("10_gb53w")
+
+[node name="Start" type="LimboState" parent="HSM/PlayerThrow"]
+script = ExtResource("11_5qq27")
+
+[node name="Some" type="LimboState" parent="HSM/PlayerThrow"]
+script = ExtResource("12_dlabj")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="HSM/PlayerThrow/Some"]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HSM/PlayerThrow/Some/CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="HSM/PlayerThrow/Some/CanvasLayer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "可丢弃的东西"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HSM/PlayerThrow/Some/CanvasLayer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ItemList" type="VBoxContainer" parent="HSM/PlayerThrow/Some/CanvasLayer/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 3
+
+[node name="None" type="LimboState" parent="HSM/PlayerThrow"]
+script = ExtResource("13_srmg5")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="HSM/PlayerThrow/None"]
+
+[node name="Label" type="Label" parent="HSM/PlayerThrow/None/CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -73.0
+offset_top = -9.0
+offset_right = 73.0
+offset_bottom = 9.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "没有可以丢弃的东西"
+
+[node name="Error" type="LimboState" parent="HSM/PlayerThrow"]
+script = ExtResource("14_umvgx")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="HSM/PlayerThrow/Error"]
+
+[node name="Label" type="Label" parent="HSM/PlayerThrow/Error/CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -73.0
+offset_top = -9.0
+offset_right = 73.0
+offset_bottom = 9.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "无法丢弃"

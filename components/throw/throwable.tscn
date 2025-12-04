@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://j5iyakeon8sw"]
+
+[ext_resource type="Script" uid="uid://dvkotgp7rn0vh" path="res://components/throw/throwable.gd" id="1_lsggs"]
+
+[node name="Throwable" type="Node"]
+script = ExtResource("1_lsggs")
