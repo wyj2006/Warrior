@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dcwx0ap5ktr4b"]
+
+[ext_resource type="Script" uid="uid://cufes52frg0as" path="res://components/attributes/speed/speed.gd" id="1_4wry4"]
+[ext_resource type="PackedScene" uid="uid://c4ut21tdsms8a" path="res://components/displayname/display_name.tscn" id="2_yryyg"]
+
+[node name="Speed" type="Node"]
+script = ExtResource("1_4wry4")
+
+[node name="DisplayName" parent="." instance=ExtResource("2_yryyg")]
+base_name = "速度"

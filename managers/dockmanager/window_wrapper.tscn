@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://d0te35m7wmc3"]
+
+[ext_resource type="Script" uid="uid://cl2l5aqreo4ox" path="res://managers/dockmanager/window_wrapper.gd" id="1_lywve"]
+
+[node name="WindowWrapper" type="Window"]
+oversampling_override = 1.0
+initial_position = 1
+size = Vector2i(1000, 618)
+content_scale_size = Vector2i(1000, 618)
+content_scale_mode = 1
+content_scale_aspect = 4
+script = ExtResource("1_lywve")
+
+[connection signal="child_exiting_tree" from="." to="." method="_on_child_exiting_tree"]

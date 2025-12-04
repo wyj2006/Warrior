@@ -1,4 +1,4 @@
-class_name Modifier extends Node
+class_name Modifier extends Resource
 
 enum Operation {
 	ADD_VALUE, ## Op0

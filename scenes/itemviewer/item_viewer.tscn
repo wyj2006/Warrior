@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=3 uid="uid://yswpsl02xehm"]
+
+[ext_resource type="PackedScene" uid="uid://cqqdgqhkenktn" path="res://scenes/dock/dock.tscn" id="1_mte0y"]
+[ext_resource type="Script" uid="uid://bclecbqd4omf4" path="res://scenes/itemviewer/item_viewer.gd" id="1_uo4ql"]
+
+[node name="ItemViewer" instance=ExtResource("1_mte0y")]
+script = ExtResource("1_uo4ql")
+
+[node name="Client" type="VBoxContainer" parent="." index="1"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Client" index="0"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Texture" type="TextureRect" parent="Client/HBoxContainer" index="0"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Name" type="Label" parent="Client/HBoxContainer" index="1"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Client" index="1"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Attributes" type="VBoxContainer" parent="Client/ScrollContainer" index="0"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3

@@ -1,9 +1,10 @@
-[gd_scene load_steps=21 format=3 uid="uid://vs3ribkc2ovk"]
+[gd_scene load_steps=26 format=3 uid="uid://vs3ribkc2ovk"]
 
 [ext_resource type="Script" uid="uid://biru6iidh3t0l" path="res://scenes/world/world.gd" id="1_6m72w"]
 [ext_resource type="PackedScene" uid="uid://bubq46ltxd7hs" path="res://managers/tilemanager/tile_manager.tscn" id="1_dphjl"]
 [ext_resource type="PackedScene" uid="uid://bwnbpr45khn8q" path="res://entities/player/player.tscn" id="2_sl2e5"]
 [ext_resource type="PackedScene" uid="uid://crso6ln3ot7y3" path="res://entities/wall/wall.tscn" id="3_1fp7r"]
+[ext_resource type="PackedScene" uid="uid://crat2yhsboo8n" path="res://managers/dockmanager/dock_manager.tscn" id="3_tytul"]
 [ext_resource type="Script" uid="uid://dvmpfoe82xmqk" path="res://scenes/world/camera_3d.gd" id="5_1yooq"]
 [ext_resource type="PackedScene" uid="uid://dkeb1f807qlvm" path="res://entities/sword/sword.tscn" id="5_v5dby"]
 [ext_resource type="PackedScene" uid="uid://rouy2xojqu2" path="res://entities/backpack/backpack.tscn" id="6_t5ptc"]
@@ -20,7 +21,39 @@
 [ext_resource type="Script" uid="uid://cdx4andbuthuh" path="res://states/playerpick/one.gd" id="13_wbwoo"]
 [ext_resource type="Script" uid="uid://ct346kbx6e1ux" path="res://states/playerthrow/error.gd" id="14_umvgx"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tytul"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_bt7bg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t634p"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6hctx"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ues17"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
 
 [node name="World" type="Node3D"]
 script = ExtResource("1_6m72w")
@@ -28,13 +61,16 @@ script = ExtResource("1_6m72w")
 [node name="TileManager" parent="." instance=ExtResource("1_dphjl")]
 unique_name_in_owner = true
 
+[node name="DockManager" parent="." instance=ExtResource("3_tytul")]
+unique_name_in_owner = true
+
 [node name="Player" parent="." instance=ExtResource("2_sl2e5")]
 unique_name_in_owner = true
 
-[node name="Backpack" parent="Player" instance=ExtResource("6_t5ptc")]
-
 [node name="Camera3D" type="Camera3D" parent="Player"]
 script = ExtResource("5_1yooq")
+
+[node name="Backpack" parent="Player" instance=ExtResource("6_t5ptc")]
 
 [node name="Wall" parent="." instance=ExtResource("3_1fp7r")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 0)
@@ -104,6 +140,8 @@ offset_right = 65.0
 offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_tytul")
+theme_override_styles/focus = SubResource("StyleBoxFlat_tytul")
 text = "没有可拾取的东西"
 
 [node name="One" type="LimboState" parent="HSM/PlayerPick"]
@@ -120,12 +158,19 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
+alignment = 1
 
 [node name="Label" type="Label" parent="HSM/PlayerPick/One/CanvasLayer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "想要对它做什么？"
 horizontal_alignment = 1
+
+[node name="ViewButton" type="Button" parent="HSM/PlayerPick/One/CanvasLayer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "查看"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="HSM/PlayerPick/One/CanvasLayer/VBoxContainer"]
 layout_mode = 2
@@ -153,6 +198,8 @@ offset_right = 33.0
 offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_t634p")
+theme_override_styles/focus = SubResource("StyleBoxFlat_t634p")
 text = "无法拾取"
 
 [node name="PlayerThrow" type="LimboHSM" parent="HSM"]
@@ -206,6 +253,8 @@ offset_right = 73.0
 offset_bottom = 9.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_6hctx")
+theme_override_styles/focus = SubResource("StyleBoxFlat_6hctx")
 text = "没有可以丢弃的东西"
 
 [node name="Error" type="LimboState" parent="HSM/PlayerThrow"]
@@ -225,4 +274,8 @@ offset_right = 73.0
 offset_bottom = 9.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_ues17")
+theme_override_styles/focus = SubResource("StyleBoxFlat_ues17")
 text = "无法丢弃"
+
+[connection signal="pressed" from="HSM/PlayerPick/One/CanvasLayer/VBoxContainer/ViewButton" to="HSM/PlayerPick/One" method="_on_view_button_pressed"]

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://crat2yhsboo8n"]
+
+[ext_resource type="Script" uid="uid://b6sdca0aaiut2" path="res://managers/dockmanager/dock_manager.gd" id="1_3kglr"]
+
+[node name="DockManager" type="CanvasLayer"]
+script = ExtResource("1_3kglr")

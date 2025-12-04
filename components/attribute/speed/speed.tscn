@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dcwx0ap5ktr4b"]
-
-[ext_resource type="Script" uid="uid://cufes52frg0as" path="res://components/attribute/speed/speed.gd" id="1_4wry4"]
-
-[node name="Speed" type="Node"]
-script = ExtResource("1_4wry4")
-attribute_name = "speed"

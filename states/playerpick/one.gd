@@ -1,5 +1,8 @@
 extends LimboState
 
+var ItemViewerScene = preload("res://scenes/itemviewer/item_viewer.tscn")
+
+@onready var dock_manager: DockManager = $/root/World/%DockManager
 @onready var player: Player = $/root/World/Player
 @onready var action_list = $CanvasLayer/VBoxContainer/ScrollContainer/ActionList
 var pick: Pick:
@@ -34,3 +37,8 @@ func _exit() -> void:
 func _update(_delta: float) -> void:
 	if Input.is_action_just_pressed("ui_accept") or Input.is_action_just_pressed("ui_cancel"):
 		dispatch(EVENT_FINISHED)
+
+func _on_view_button_pressed() -> void:
+	var item_viewer = ItemViewerScene.instantiate()
+	item_viewer.item = item
+	dock_manager.embed_dock(item_viewer)
